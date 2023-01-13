@@ -1,0 +1,10 @@
+mat-form-field{
+  width: 60%;
+  text-align: right;
+}
+
+example-button-row{
+  display: inline-block;
+text-align: right;
+width: auto;
+}
