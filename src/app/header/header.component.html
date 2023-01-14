@@ -1,0 +1,21 @@
+<p>
+  <mat-toolbar color="primary">
+    <span><a class="headline-1">Garage</a></span>
+    <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item>Item 1</a>
+      <a mat-menu-item>Item 2</a>
+    </mat-menu> -->
+    <span class="spacer"></span>
+    <ul>
+      <li>
+        <a mat-button routerLink="/user-list" routerLinkActive="active">Liste des utilisateurs</a>
+        <a mat-button routerLink="/">Se connecter</a>
+        <a mat-button routerLink="/user-create" >S'inscrire</a>
+        <a mat-button  color="accent" routerLinkActive="active">Se déconnecter</a>
+      </li>
+    </ul>
+
+
+  </mat-toolbar>
+</p>

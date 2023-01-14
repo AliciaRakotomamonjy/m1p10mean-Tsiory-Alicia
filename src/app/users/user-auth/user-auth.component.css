@@ -1,0 +1,14 @@
+mat-form-field{
+  width: 40%;
+  text-align: center;
+}
+
+example-button-row{
+  display: inline-block;
+text-align: center;
+width: auto;
+}
+
+example-form{
+  text-align: center;
+}
