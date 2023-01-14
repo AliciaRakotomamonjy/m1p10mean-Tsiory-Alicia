@@ -9,6 +9,7 @@ database.get = () => {
     return _dbConnection;
 }
 
+//DB_URL = "mongodb+srv://admin:admin123456789@cluster0.eqwhlbk.mongodb.net/test?retryWrites=true&w=majority"
 database.connect = () => {
     return new Promise(async (resolve, reject) => {
         try {

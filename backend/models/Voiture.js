@@ -8,7 +8,9 @@ const VoitureSchema = new Schema({
         required : true  
     },
     personne : {
-
+        type: Schema.Types.ObjectId,
+        ref : "Personne",
+        required : true 
     }
 });
 
