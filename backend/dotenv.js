@@ -16,4 +16,4 @@ function updateEnv (pathToConfig) {
 }
 
 // Update Environment variables
-updateEnv('./configuration/variables.env')
+updateEnv('./backend/configuration/variables.env')

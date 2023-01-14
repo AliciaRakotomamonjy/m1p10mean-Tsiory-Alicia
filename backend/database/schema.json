@@ -1,0 +1,36 @@
+{
+    "type_personne" : {
+        "_id" : "ObjectId",
+        "libelle" : "string" 
+    },
+    "personne" : {
+        "_id" : "ObjectId",
+        "nom" : "string",
+        "prenom" : "string",
+        "date_naissance" : "date",
+        "email" : "string",
+        "mdp" : "string",
+        "type_personne" : {
+            "_id" : "ObjectId",
+            "libelle" : "string" 
+        }
+    },
+    "voiture" : {
+        "_id" : "ObjectId",
+        "matricul" : "string",
+        "personne" : {
+            "_id" : "ObjectId",
+            "nom" : "string",
+            "prenom" : "string",
+            "date_naissance" : "date",
+            "email" : "string",
+            "mdp" : "string",
+            "type_personne" : {
+                "_id" : "ObjectId",
+                "libelle" : "string" 
+            }
+        }
+    }
+}
+
+
