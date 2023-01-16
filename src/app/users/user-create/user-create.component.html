@@ -1,20 +1,26 @@
 <h1 class="headline-1">Inscription</h1>
-<form action="">
+<form action="" (submit)="onSavePost(postForm)" #postForm="ngForm" >
 <mat-form-field appearance="fill">
   <mat-label>Nom</mat-label>
-  <input matInput>
+  <input matInput type="text" name="nom" #nom="ngModel" ngModel="" required>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>Prenom</mat-label>
-  <input matInput>
+  <input matInput type="text" name="prenom" #prenom="ngModel" ngModel="" required>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Date de naissance</mat-label>
+  <input matInput [matDatepicker]="picker" name="date" #date="ngModel" ngModel="" required>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>E-mail</mat-label>
-  <input matInput type="email">
+  <input matInput type="email" name="email" #email="ngModel" ngModel="" required>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>Mot de passe</mat-label>
-  <input matInput type="password">
+  <input matInput type="password" name="password" #password="ngModel" ngModel="" required>
 </mat-form-field><br>
 <button mat-flat-button color="primary">S'inscrire</button>
 

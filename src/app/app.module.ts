@@ -25,6 +25,9 @@ import { LoginComponent } from './components/login/login.component';
 import { TokenInterceptor } from './helpers/token.interceptor';
 import { RouterModule } from '@angular/router';
 import { TemplateComponent } from './components/template/template.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -55,11 +58,14 @@ import { TemplateComponent } from './components/template/template.component';
     MatProgressSpinnerModule,
     MatTableModule,
     MatSidenavModule ,
-    MatListModule
+    MatListModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     { provide : HTTP_INTERCEPTORS, useClass: TokenInterceptor,multi: true },
     CdkColumnDef
+    
   ],
   bootstrap: [AppComponent]
 })
