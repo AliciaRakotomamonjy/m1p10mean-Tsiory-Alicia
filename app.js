@@ -21,13 +21,18 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
   
   app.use(express.static(path.join(__dirname, 'dist/garage')));
 
+  app.use((req, res, next) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Headers', '*');
+    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    
+    next();
+  });
+  
   // routes
   app.use('/api', indexRouter);
   app.use('/api/users', usersRouter);
   app.use('/api/login', loginRouter);
-
-  
-  
 
   // Catch all other routes and return the index file
   app.get('*', (req, res) => {
