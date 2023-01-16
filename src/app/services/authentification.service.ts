@@ -41,4 +41,8 @@ export class AuthentificationService {
   public getToken(): string | null {
     return this.isLoggedIn() ? localStorage.getItem(this.tokenKey) : null;
   }
+
+  public getTokenKey(): string {
+    return this.tokenKey;
+  }
 }

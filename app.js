@@ -16,6 +16,9 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
 .then(() => {
   console.log("Database connection successful !");
 
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  
   app.use((req,res,next)=> {
     res.setHeader("Access-Control-Allow-Origin","*");
     res.setHeader("Access-Control-Allow-Headers",
@@ -25,8 +28,7 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
     next();
   });
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
+  
 
 
   app.use(express.static(path.join(__dirname, 'dist/garage')));

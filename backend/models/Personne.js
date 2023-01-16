@@ -25,14 +25,16 @@ const PersonneSchema = new Schema({
         type : String,
         required : true
     },
-    // type_personne : {
-    //     type : Schema.Types.ObjectId,
-    //     ref : "TypePersonne"
-    // }
+    type_personne : {
+        type : Schema.Types.ObjectId,
+        ref : "TypePersonne"
+    }
+},{
+    collection : "personne"
 });
 
 PersonneSchema.plugin(uniqueValidator);
 
-const Personne = mongoose.model("Personne",PersonneSchema);
+const Personne = mongoose.model("personne",PersonneSchema);
 
 module.exports = Personne;

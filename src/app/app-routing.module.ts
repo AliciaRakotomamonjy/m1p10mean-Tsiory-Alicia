@@ -8,7 +8,7 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 
 const routes: Routes = [
-  { path : '', component: TemplateComponent},
+  { path : '', component: TemplateComponent, canActivate: [AuthGuard]},
   { path : 'user-list', component:UserListComponent },
   { path : 'user-create', component:UserCreateComponent },
   { path : 'login', component : LoginComponent }

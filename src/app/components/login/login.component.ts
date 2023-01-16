@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthentificationService } from '../../services/authentification.service';
 
 @Component({
@@ -10,9 +11,10 @@ import { AuthentificationService } from '../../services/authentification.service
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
-  public resultLogin : any;
+  public message : string = "";
+  public loading : boolean = false;
 
-  constructor(private authenticationService: AuthentificationService) {}
+  constructor(private authenticationService: AuthentificationService,private router : Router) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -23,17 +25,20 @@ export class LoginComponent implements OnInit {
 
   public onSubmit() {
     console.log(this.loginForm)
-    const result = this.authenticationService.login(
+    this.loading = true;
+    this.authenticationService.login(
       this.loginForm.get('username')!.value,
       this.loginForm!.get('password')!.value
-    );
-    result.subscribe((res)=>{
-      if('token' in res){
-
-      }else{
-        this.resultLogin = res.message
+    ).subscribe(
+      res=>{
+        localStorage.setItem(this.authenticationService.getTokenKey(), res.token);
+        this.router.navigate(['/']);
+      }, 
+      err => {
+        this.message = err.error.message
+        this.loading = false;
       }
-    })
+    )
 
     
   }
