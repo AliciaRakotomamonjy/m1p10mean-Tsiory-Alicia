@@ -1,33 +1,37 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const Schema = mongoose.Schema
 
 const PersonneSchema = new Schema({
-    nom : { 
+    nom : {
         type : String,
-        required : true 
+        required : true
     },
-    prenom : { 
+    prenom : {
         type : String,
-        required : true 
+        required : true
     },
-    date_naissance : { 
+    date_naissance : {
         type : Date,
-        required : true 
+        required : true
     },
-    email : { 
+    email : {
         type : String,
-        required : true 
+        required : true ,
+        unique:true
     },
-    mdp: { 
+    mdp: {
         type : String,
-        required : true 
+        required : true
     },
-    type_personne : {
-        type : Schema.Types.ObjectId,
-        ref : "TypePersonne"
-    }
+    // type_personne : {
+    //     type : Schema.Types.ObjectId,
+    //     ref : "TypePersonne"
+    // }
 });
+
+PersonneSchema.plugin(uniqueValidator);
 
 const Personne = mongoose.model("Personne",PersonneSchema);
 

@@ -10,15 +10,25 @@ const indexRouter = require('./backend/routes/index');
 const usersRouter = require('./backend/routes/users');
 const loginRouter = require('./backend/routes/login');
 
+mongoose.set("strictQuery", false);
 
 mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
 .then(() => {
   console.log("Database connection successful !");
 
-  app.use(bodyParser.json()); 
-  app.use(bodyParser.urlencoded({ extended: false })); 
+  app.use((req,res,next)=> {
+    res.setHeader("Access-Control-Allow-Origin","*");
+    res.setHeader("Access-Control-Allow-Headers",
+    "Origin, X-Requested-With,Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Methods",
+    "GET,POST,PATCH,DELETE,PUT,OPTIONS");
+    next();
+  });
 
-  
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+
+
   app.use(express.static(path.join(__dirname, 'dist/garage')));
 
   // routes
@@ -26,8 +36,8 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
   app.use('/api/users', usersRouter);
   app.use('/api/login', loginRouter);
 
-  
-  
+
+
 
   // Catch all other routes and return the index file
   app.get('*', (req, res) => {
@@ -39,8 +49,8 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
   app.use(function(req, res, next) {
     next(createError(404));
   });
-  
-  // Listen 
+
+  // Listen
   const port = process.env.PORT || 5000;
   app.listen(port, function () {
     console.log(`Listening on ${port}`)

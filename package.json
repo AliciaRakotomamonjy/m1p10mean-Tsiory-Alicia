@@ -7,7 +7,7 @@
     "build": "ng build && node app.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev" : "ng build && nodemon app.js"
+    "dev": "ng build && nodemon app.js"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^15.1.0",
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -30,6 +31,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^4.13.0",
     "mongoose": "^6.8.3",
+    "mongoose-unique-validator": "^3.1.0",
     "morgan": "~1.9.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

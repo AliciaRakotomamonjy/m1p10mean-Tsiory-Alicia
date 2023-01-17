@@ -19,6 +19,9 @@ import { UserAuthComponent } from './users/user-auth/user-auth.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { UserCreateComponent } from './users/user-create/user-create.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
     HttpClientModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [CdkColumnDef],
   bootstrap: [AppComponent]
