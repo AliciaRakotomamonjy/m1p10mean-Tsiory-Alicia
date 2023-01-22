@@ -10,9 +10,18 @@ const ReparationSchema = new Schema({
     etat : {
         type: Number
     },
+    date_depot : {
+        type : Date,
+        default : Date.now
+    },
+    date_sortie: {
+        type:Date
+    },
+    date_debut_reparation: { type: Date },
+    date_fin_reparation: { type: Date },
     type_reparation: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'TypePersonne'
+        ref: 'TypeReparation'
     }]
 });
 const Reparation = mongoose.model("Reparation",ReparationSchema);

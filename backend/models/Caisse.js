@@ -12,7 +12,7 @@ const CaisseSchema = new Schema({
     date_mouvement : {
         type : Date,
         required : true,
-        default: Date.now
+        default: Date.now 
     }
 },{collection: "caisse"});
 
