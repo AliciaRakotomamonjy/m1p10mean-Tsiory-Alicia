@@ -28,13 +28,8 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
     next();
   });
 
-  
-
-
   app.use(express.static(path.join(__dirname, 'dist/garage')));
 
-  
-  
   // routes
   app.use('/api', indexRouter);
   app.use('/api/users', usersRouter);
