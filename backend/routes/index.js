@@ -9,5 +9,4 @@ router.get('/',method.ensureToken, (req, res, next) => {
 });
 
 
-
 module.exports = router;

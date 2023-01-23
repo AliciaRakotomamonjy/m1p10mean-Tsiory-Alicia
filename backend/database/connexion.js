@@ -4,7 +4,6 @@ var _dbConnection;
 var _connection;
 
 var database = {}
-
 database.get = () => {
     return _dbConnection;
 }
