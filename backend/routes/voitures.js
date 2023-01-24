@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Voiture = require("../models/Voiture");
-const Reparation = require("../models/Reparation");
+const Reparationroute = require("./reparation");
 
 router.get("/", (req, res, next) => {
   //console.log(req.query);
@@ -19,15 +19,6 @@ router.get("/", (req, res, next) => {
     });
 });
 
-const checkvoitureinreparation = (idvoiture) => {
-  let compteur;
-  compteur = Reparation.count({ voiture: idvoiture, etat: { $ne: "sorti" } });
-  if ((compteur = 0)) {
-    return false;
-  } else {
-    return true;
-  }
-};
 
 router.post("/", (req, res, next) => {
   //console.log(req.query);
@@ -57,7 +48,7 @@ router.post("/", (req, res, next) => {
 router.delete("/:id", (req, res, next) => {
   // console.log(req.params.id);
   // console.log(req.userData);
-  const check = checkvoitureinreparation(req.params.id);
+  const check = Reparationroute.checkvoitureinreparation(req.params.id);
   if (!check) {
     Voiture.deleteOne({ _id: req.params.id, personne: req.userData.userId })
       .then((result) => {
