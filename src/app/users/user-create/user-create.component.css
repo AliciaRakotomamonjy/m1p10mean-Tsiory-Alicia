@@ -8,3 +8,20 @@ example-button-row{
 text-align: right;
 width: auto;
 }
+
+.authentication-card {
+  width: 35%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+mat-spinner{
+  margin: auto;
+  margin-top: 5px;
+}

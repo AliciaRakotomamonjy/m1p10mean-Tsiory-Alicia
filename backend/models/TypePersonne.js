@@ -5,9 +5,9 @@ const Schema = mongoose.Schema
 const TypePersonneSchema = new Schema({
     libelle : {
         type : String,
-        required : true  
+        required : true
     }
-});
+},{ collection: 'type_personne' });
 
 const TypePersonne = mongoose.model("TypePersonne",TypePersonneSchema);
 

@@ -1,27 +1,50 @@
-<h1 class="headline-1">Inscription</h1>
-<form action="" (submit)="onSavePost(postForm)" #postForm="ngForm" >
-<mat-form-field appearance="fill">
-  <mat-label>Nom</mat-label>
-  <input matInput type="text" name="nom" #nom="ngModel" ngModel="" required>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Prenom</mat-label>
-  <input matInput type="text" name="prenom" #prenom="ngModel" ngModel="" required>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Date de naissance</mat-label>
-  <input matInput [matDatepicker]="picker" name="date" #date="ngModel" ngModel="" required>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>E-mail</mat-label>
-  <input matInput type="email" name="email" #email="ngModel" ngModel="" required>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Mot de passe</mat-label>
-  <input matInput type="password" name="password" #password="ngModel" ngModel="" required>
-</mat-form-field><br>
-<button mat-flat-button color="primary">S'inscrire</button>
+<div class="authentication-card-container" fxLayout="column" fxLayoutAlign="center">
+  <mat-card class="authentication-card">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <mat-card-header>
+      <mat-card-title>
+        <h1>Inscription</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+      <form (submit)="Inscription(registerForm)" #registerForm="ngForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Nom</mat-label>
+          <input matInput type="text" name="nom" #nom="ngModel" ngModel required>
+          <mat-error *ngIf="nom.invalid">Le champ Nom est requis</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Prenom</mat-label>
+          <input matInput type="text" name="prenom" #prenom="ngModel" ngModel required>
+          <mat-error *ngIf="prenom.invalid">Le champ prenom est requis</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Date de naissance</mat-label>
+          <input matInput [matDatepicker]="picker" name="date" #date="ngModel" ngModel required>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="date.invalid">Le champ date de naissance est requis</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" name="email" #email="ngModel" ngModel required email>
+          <mat-error *ngIf="email.invalid">Le champ email est requis et doit etre valide.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput type="password" name="password" #password="ngModel" ngModel required>
+          <mat-error *ngIf="password.invalid">Le champ mot de passe est requis</mat-error>
+        </mat-form-field><br>
+        <mat-card-actions>
+          <button style="margin-left: 15px;" mat-button routerLink="/login" routerLinkActive="active">
+            J'ai deja un compte. Se connecter
+          </button>
+          <button mat-flat-button type="submit" color="primary" *ngIf="!isLoading">S'inscrire</button>
+        </mat-card-actions>
 
-</form>
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+</div>
