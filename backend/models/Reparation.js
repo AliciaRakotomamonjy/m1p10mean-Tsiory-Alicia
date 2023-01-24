@@ -8,7 +8,8 @@ const ReparationSchema = new Schema({
         ref : "Voiture"
     },
     etat : {
-        type: Number
+        type: Number,
+        default: 0 //depot
     },
     date_depot : {
         type : Date,
@@ -30,11 +31,11 @@ const Reparation = mongoose.model("Reparation",ReparationSchema);
 const TypeReparationSchema = new Schema({
     libelle : {
         type : String,
-        required : true  
+        required : true
     },
     montant : {
         type : Number,
-        required : true 
+        required : true
     },
     reparation_join_type: {
         type: mongoose.Schema.Types.ObjectId,
