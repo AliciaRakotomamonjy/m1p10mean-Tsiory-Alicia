@@ -27,13 +27,13 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     this.isLoading = false;
     console.log(form.value);
 
-    // this.usersService.addUser(
-    //   form.value.nom,
-    //   form.value.prenom,
-    //   form.value.date,
-    //   form.value.email,
-    //   form.value.password
-    // );
+    this.usersService.addUser(
+      form.value.nom,
+      form.value.prenom,
+      form.value.date,
+      form.value.email,
+      form.value.password
+    );
     form.resetForm();
   }
 

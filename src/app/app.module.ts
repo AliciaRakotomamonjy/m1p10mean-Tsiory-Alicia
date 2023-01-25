@@ -29,6 +29,7 @@ import { RouterModule } from '@angular/router';
 import { TemplateComponent } from './components/template/template.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TemplateAtelierComponent } from './components/template-atelier/template-atelier.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     UserListComponent,
     UserCreateComponent,
     LoginComponent,
-    TemplateComponent
+    TemplateComponent,
+    TemplateAtelierComponent
   ],
   imports: [
     HttpClientModule,

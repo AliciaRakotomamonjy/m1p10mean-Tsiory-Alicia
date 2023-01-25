@@ -1,29 +1,44 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const Personne = require("../models/Personne");
 
 router.post("/", (req,res) => {
-    console.log("enter /login with method post")
-    console.log(req.body)
     let email = req.body.email
     let mdp = req.body.mdp
 
-    Personne.findOne({email : email, mdp: mdp})
+    Personne.findOne({email : email
+    })
         .then((user)=>{
-            console.log(user)
             if(!user){
                 res.status(404).json({
                     ok: false,
-                    message: "Email ou mot de passe incorrect"
+                    message: "Email ou mot de passe incorrect !"
                 })
-                
             }else{
-                const token = jwt.sign({ id: user._id , email : email,date : Date() }, 
-                    process.env.SECRET) 
-                res.json({
-                    ok : true,
-                    token: token
+                bcrypt.compare(mdp,user.mdp,(err,isMatch)=>{
+                    if(err){
+                        res.status(500).json({
+                            ok: false,
+                            message: "Une erreur s'est produite !"
+                        }) 
+                    }
+                    console.log(isMatch)
+                    if(!isMatch){
+                        res.status(404).json({
+                            ok: false,
+                            message: "Email ou mot de passe incorrect !"
+                        }) 
+                    }else{
+                        
+                        const token = jwt.sign({ id: user._id , email : email,date : Date() }, 
+                        process.env.SECRET) 
+                        res.status(200).json({
+                            ok : true,
+                            token: token
+                        })
+                    }  
                 })
             }
         }).catch((error)=>{
