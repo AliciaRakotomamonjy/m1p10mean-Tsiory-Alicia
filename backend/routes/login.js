@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const Personne = require("../models/Personne");
+const personneService = require("../services/personne-service");
 
 router.post("/", (req,res) => {
     let email = req.body.email
     let mdp = req.body.mdp
+    // _id type_personne responsable client
+    const type_personne = ''
 
-    Personne.findOne({email : email
-    })
+    personneService.findByEmailAndTypePersonne(email,type_personne)
         .then((user)=>{
             if(!user){
                 res.status(404).json({
@@ -46,9 +47,99 @@ router.post("/", (req,res) => {
                 ok: false,
                 message: error
             })
-        })
-    
-    
+        })    
 })
   
+
+router.post("/atelier", (req,res) => {
+    let email = req.body.email
+    let mdp = req.body.mdp
+    // _id type_personne responsable atelier
+    const type_personne = ''
+
+    personneService.findByEmailAndTypePersonne(email,type_personne)
+        .then((user)=>{
+            if(!user){
+                res.status(404).json({
+                    ok: false,
+                    message: "Email ou mot de passe incorrect !"
+                })
+            }else{
+                bcrypt.compare(mdp,user.mdp,(err,isMatch)=>{
+                    if(err){
+                        res.status(500).json({
+                            ok: false,
+                            message: "Une erreur s'est produite !"
+                        }) 
+                    }
+
+                    if(!isMatch){
+                        res.status(404).json({
+                            ok: false,
+                            message: "Email ou mot de passe incorrect !"
+                        }) 
+                    }else{
+                        
+                        const token = jwt.sign({ id: user._id , email : email,date : Date() }, 
+                        process.env.SECRET) 
+                        res.status(200).json({
+                            ok : true,
+                            token: token
+                        })
+                    }  
+                })
+            }
+        }).catch((error)=>{
+            res.json({
+                ok: false,
+                message: error
+            })
+        })    
+})
+
+router.post("/financier", (req,res) => {
+    let email = req.body.email
+    let mdp = req.body.mdp
+    // _id type_personne responsable financier
+    const type_personne = ''
+
+    personneService.findByEmailAndTypePersonne(email,type_personne)
+        .then((user)=>{
+            if(!user){
+                res.status(404).json({
+                    ok: false,
+                    message: "Email ou mot de passe incorrect !"
+                })
+            }else{
+                bcrypt.compare(mdp,user.mdp,(err,isMatch)=>{
+                    if(err){
+                        res.status(500).json({
+                            ok: false,
+                            message: "Une erreur s'est produite !"
+                        }) 
+                    }
+
+                    if(!isMatch){
+                        res.status(404).json({
+                            ok: false,
+                            message: "Email ou mot de passe incorrect !"
+                        }) 
+                    }else{
+                        
+                        const token = jwt.sign({ id: user._id , email : email,date : Date() }, 
+                        process.env.SECRET) 
+                        res.status(200).json({
+                            ok : true,
+                            token: token
+                        })
+                    }  
+                })
+            }
+        }).catch((error)=>{
+            res.json({
+                ok: false,
+                message: error
+            })
+        })    
+})
 module.exports = router;

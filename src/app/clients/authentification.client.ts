@@ -18,4 +18,24 @@ export class AuthenticationClient {
       { responseType: 'json' }
     );
   }
+
+  public loginAtelier(email: string, mdp: string): Observable<any> {
+    return this.http.post(environment.apiUrl +'/login/atelier',
+      {
+        email: email,
+        mdp: mdp,
+      },
+      { responseType: 'json' }
+    );
+  }
+
+  public loginFinancier(email: string, mdp: string): Observable<any> {
+    return this.http.post(environment.apiUrl +'/login/financier',
+      {
+        email: email,
+        mdp: mdp,
+      },
+      { responseType: 'json' }
+    );
+  }
 }
