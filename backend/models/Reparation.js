@@ -28,8 +28,7 @@ const ReparationSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'TypeReparation'
     }]
-});
+}, { collection: 'reparations' });
+
 const Reparation = mongoose.model("Reparation",ReparationSchema);
-
-
 module.exports = Reparation;
