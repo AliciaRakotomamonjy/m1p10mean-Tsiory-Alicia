@@ -8,7 +8,7 @@ router.post("/", (req,res) => {
     let email = req.body.email
     let mdp = req.body.mdp
     // _id type_personne responsable client
-    const type_personne = ''
+    const type_personne = '63c02ee2a24f608157199e55'
 
     personneService.findByEmailAndTypePersonne(email,type_personne)
         .then((user)=>{
@@ -55,7 +55,7 @@ router.post("/atelier", (req,res) => {
     let email = req.body.email
     let mdp = req.body.mdp
     // _id type_personne responsable atelier
-    const type_personne = ''
+    const type_personne = '63c02e62a24f608157199e53'
 
     personneService.findByEmailAndTypePersonne(email,type_personne)
         .then((user)=>{
@@ -101,7 +101,7 @@ router.post("/financier", (req,res) => {
     let email = req.body.email
     let mdp = req.body.mdp
     // _id type_personne responsable financier
-    const type_personne = ''
+    const type_personne = '63c02ed9a24f608157199e54'
 
     personneService.findByEmailAndTypePersonne(email,type_personne)
         .then((user)=>{

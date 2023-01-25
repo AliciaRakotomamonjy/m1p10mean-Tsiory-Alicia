@@ -7,7 +7,7 @@ const EtatSchema = new Schema({
         type : String,
         required : true
     }
-},{ collection: 'type_personne' });
+},{ collection: 'etat' });
 
 const Etat = mongoose.model("Etat",EtatSchema);
 

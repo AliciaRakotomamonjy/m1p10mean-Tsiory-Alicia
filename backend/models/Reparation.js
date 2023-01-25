@@ -8,8 +8,9 @@ const ReparationSchema = new Schema({
         ref : "Voiture"
     },
     etat : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Etat'
+        type : Number,
+        ref: "Etat",
+        default : 0
     },
     date_depot : {
         type : Date,
