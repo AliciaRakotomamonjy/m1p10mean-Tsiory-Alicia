@@ -1,28 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const Reparation = require("../models/Reparation");
-
-const checkvoitureinreparation = (idvoiture) => {
-  let compteur;
-  compteur = Reparation.count({ voiture: idvoiture, etat: { $ne: 6 } });
-  if ((compteur = 0)) {
-    return false;
-  } else {
-    return true;
-  }
-};
+var mongoose = require("mongoose");
 
 router.post("/", (req, res, next) => {
-  if (checkvoitureinreparation(req.body.voiture)) {
-    //console.log(req.query);
-    const reparation = new Reparation({
-      voiture: req.body.voiture,
-      date_sortie: undefined,
-      date_debut_reparation: undefined,
-      date_fin_reparation: undefined,
-      type_reparation: undefined,
-    });
-    reparation
+  Reparation.count({
+    voiture: mongoose.Types.ObjectId(req.body.voiture),
+    etat: { $ne: 6 }
+  }).then((resultat) => {
+    console.log(resultat);
+    if(resultat !=0){
+      return res.status(500).json({
+        "message" : "Une reparation est encore en cours sur cette vehicule"
+      })
+    }
+    else{
+      const reparation = new Reparation({
+        voiture: req.body.voiture,
+        date_sortie: undefined,
+        date_debut_reparation: undefined,
+        date_fin_reparation: undefined,
+      });
+      reparation
       .save()
       .then((reparationcree) => {
         res.status(201).json({
@@ -38,15 +37,12 @@ router.post("/", (req, res, next) => {
           message: `Reparation non creer pour cause : ${error}`,
         });
       });
-  } else {
-    res.status(500).json({
-      message: `une reparation est encore en cours sur cette vehicule`,
-    });
-  }
+    }
+  })
 });
 
 router.get("/histo/:id", (req, res, next) => {
-  Reparation.find({voiture: req.params.id, etat:6})
+  Reparation.find({ voiture: req.params.id, etat: 6 })
     .then((repara) => {
       if (repara) {
         res.status(200).json(repara);
@@ -61,4 +57,4 @@ router.get("/histo/:id", (req, res, next) => {
     });
 });
 
-module.exports = { router, checkvoitureinreparation };
+module.exports = router;

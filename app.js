@@ -10,6 +10,7 @@ const indexRouter = require('./backend/routes/index');
 const usersRouter = require('./backend/routes/users');
 const loginRouter = require('./backend/routes/login');
 const voitureRouter = require('./backend/routes/voitures');
+const reparationRouter = require("./backend/routes/reparation");
 
 mongoose.set("strictQuery", false);
 
@@ -36,6 +37,7 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
   app.use('/api/users', usersRouter);
   app.use('/api/client/voitures',voitureRouter);
   app.use('/api/login', loginRouter);
+  app.use('/api/reparation',reparationRouter);
 
   // Catch all other routes and return the index file
   app.get('*', (req, res) => {

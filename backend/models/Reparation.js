@@ -24,7 +24,8 @@ const ReparationSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'TypeReparation'
     }]
-});
+}, { collection: 'reparations' });
+
 const Reparation = mongoose.model("Reparation",ReparationSchema);
 
 
@@ -64,4 +65,6 @@ const ReparationJoinTypeReparation = mongoose.model("ReparationJoinTypeReparatio
 
 
 
-module.exports = {TypeReparation, Reparation, ReparationJoinTypeReparation};
+module.exports = TypeReparation;
+module.exports = ReparationJoinTypeReparation;
+module.exports = Reparation;
