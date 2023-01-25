@@ -6,6 +6,4 @@ db.reparations.remove({"_id": "63d0e1f884158a21d203fcc7"});
 db.reparations.remove({});
 
 
-db.reparations.update({"_id": new ObjectId("63d103f7af806e6201ae6181")}, {$set: {"etat": 0}});
-
-
+db.reparations.update({"_id": new ObjectId("63d11d2122e838b5612ea022")}, {$set: {"etat": 5}});
