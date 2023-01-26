@@ -1,14 +1,14 @@
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { AuthenticationClient } from '../clients/authentification.client';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class AuthentificationService {
-  private tokenKey = 'tokenClient';
+
+export class AuthentificationFinancierService {
+  private tokenKey = 'tokenFinancier';
 
   constructor(
     private authenticationClient: AuthenticationClient,
