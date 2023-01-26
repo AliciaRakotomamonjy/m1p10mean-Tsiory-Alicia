@@ -84,4 +84,20 @@ router.get("/histo/:id", (req, res, next) => {
     });
 });
 
+router.get("/", (req, res, next) => {
+  Reparation.find()
+    .then((repara) => {
+      if (repara) {
+        res.status(200).json(repara);
+      } else {
+        res.status(404).json({ message: "Aucun reparation non trouvee!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: `repara non recuperer pour cause : ${error}`,
+      });
+    });
+});
+
 module.exports = router;
