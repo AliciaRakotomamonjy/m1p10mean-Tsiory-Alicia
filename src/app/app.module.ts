@@ -32,6 +32,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TemplateAtelierComponent } from './components/template-atelier/template-atelier.component';
 import { LoginAtelierComponent } from './components/login-atelier/login-atelier.component';
 import { LoginFinancierComponent } from './components/login-financier/login-financier.component';
+import { ErrorInterceptor } from './error-interceptor';
+import { ErrorComponent } from './error/error.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import { LoginFinancierComponent } from './components/login-financier/login-fina
     TemplateComponent,
     TemplateAtelierComponent,
     LoginAtelierComponent,
-    LoginFinancierComponent
+    LoginFinancierComponent,
+    ErrorComponent
   ],
   imports: [
     HttpClientModule,
@@ -70,12 +74,14 @@ import { LoginFinancierComponent } from './components/login-financier/login-fina
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
   ],
   providers: [
     { provide : HTTP_INTERCEPTORS, useClass: TokenInterceptor,multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     CdkColumnDef
-    
+
   ],
   bootstrap: [AppComponent]
 })

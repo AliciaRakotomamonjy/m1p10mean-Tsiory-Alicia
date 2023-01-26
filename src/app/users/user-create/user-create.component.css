@@ -25,3 +25,8 @@ mat-spinner{
   margin: auto;
   margin-top: 5px;
 }
+
+.success{
+  background-color: green;
+  color:white;
+}
