@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const personneService = require("../services/personne-service");
+const personneService = require("../services/personneService");
 
 router.post("/", (req,res) => {
     let email = req.body.email
@@ -56,9 +56,10 @@ router.post("/atelier", (req,res) => {
     let mdp = req.body.mdp
     // _id type_personne responsable atelier
     const type_personne = '63c02e62a24f608157199e53'
-
+    console.log("tafiditra /login/atelier")
     personneService.findByEmailAndTypePersonne(email,type_personne)
         .then((user)=>{
+            console.log(user)
             if(!user){
                 res.status(404).json({
                     ok: false,
@@ -105,6 +106,7 @@ router.post("/financier", (req,res) => {
 
     personneService.findByEmailAndTypePersonne(email,type_personne)
         .then((user)=>{
+            console.log(user)
             if(!user){
                 res.status(404).json({
                     ok: false,

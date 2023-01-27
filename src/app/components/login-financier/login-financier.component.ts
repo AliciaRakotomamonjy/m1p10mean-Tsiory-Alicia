@@ -23,7 +23,6 @@ export class LoginFinancierComponent {
   }
 
   public onSubmit() {
-    console.log(this.loginForm)
     this.loading = true;
     this.authenticationService.login(
       this.loginForm.get('username')!.value,

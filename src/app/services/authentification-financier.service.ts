@@ -16,7 +16,7 @@ export class AuthentificationFinancierService {
   ) {}
 
   public login(username: string, password: string): Observable<any> {
-    return this.authenticationClient.login(username, password).pipe(map(data => data ))
+    return this.authenticationClient.loginFinancier(username, password).pipe(map(data => data ))
   }
 
   // public register(username: string, email: string, password: string): void {
@@ -30,7 +30,7 @@ export class AuthentificationFinancierService {
 
   public logout() {
     localStorage.removeItem(this.tokenKey);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login-atelier']);
   }
 
   public isLoggedIn(): boolean {

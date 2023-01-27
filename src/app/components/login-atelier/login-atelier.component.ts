@@ -23,7 +23,6 @@ export class LoginAtelierComponent {
   }
 
   public onSubmit() {
-    console.log(this.loginForm)
     this.loading = true;
     this.authenticationService.login(
       this.loginForm.get('username')!.value,
@@ -31,7 +30,7 @@ export class LoginAtelierComponent {
     ).subscribe(
       res=>{
         localStorage.setItem(this.authenticationService.getTokenKey(), res.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/atelier']);
       }, 
       err => {
         this.message = err.error.message

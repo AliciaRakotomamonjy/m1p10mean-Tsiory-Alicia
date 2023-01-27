@@ -2,12 +2,13 @@ const Personne = require("../models/Personne");
 
 module.exports = {
     async findByEmailAndTypePersonne(email,type_personne){
-        const result = []
         try{
-            result = await Personne.find({email : email})
+            let result = await Personne.findOne({email : email,type_personne: type_personne})
+            return result;
         }catch(error){
             throw error
+            console.error(error)
         }
-        return result;
+        
     }
 }

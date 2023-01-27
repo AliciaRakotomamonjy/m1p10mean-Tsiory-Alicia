@@ -14,10 +14,10 @@
                 </a>
                 <hr>
                 <mat-nav-list class="nav nav-pills flex-column mb-auto">
-                    <mat-list-item *ngFor="let menu of menus" [routerLink]="menu.link" >
+                    <a mat-list-item *ngFor="let menu of menus" [routerLink]="menu.link" routerLinkActive="is-active">
                       <mat-icon matListItemIcon>{{menu.icon}}</mat-icon>
                       <div matListItemTitle>{{menu.name}}</div>
-                    </mat-list-item>
+                    </a>
                     <mat-divider></mat-divider>
                 </mat-nav-list>
                 <hr>
@@ -38,18 +38,18 @@
     </mat-sidenav>
    
     <mat-sidenav-content class="sidenav-content">
-       <mat-toolbar class="bg-primary" >
+       <mat-toolbar class="header" #header >
             <button
                 type="button"
                 aria-label="Toggle sidenav"
                 mat-icon-button
                 (click) = "drawer.toggle()"
             >
-                <mat-icon aria-label="Side nav toggle icon" >{{ drawer.opened ? 'keyboard_arrow_left' : 'keyboard_arrow_right' }}</mat-icon>
+                <!-- <mat-icon aria-label="Side nav toggle icon" >{{ drawer.opened ? 'keyboard_arrow_left' : 'keyboard_arrow_right' }}</mat-icon> -->
+                <mat-icon aria-label="Side nav toggle icon" >menu</mat-icon>
             </button>
-            <span *ngIf="!drawer.opened" > <mat-icon> directions_car</mat-icon> Garage</span>
+            <span *ngIf="!drawer.opened" > <img class="bi pe-none me-2" width="40" height="32" src="../../../assets/img/garage (2).png" > Garage</span>
             <span class="example-spacer"></span>
-            
             
             <mat-nav-list class="nav nav-pills flex-column mb-auto">
                 <mat-list-item [matMenuTriggerFor]="menu">
@@ -68,6 +68,17 @@
                 </button>
             </mat-menu>
         </mat-toolbar>
+        <div  class="main-content" #mainContent >
+            <router-outlet></router-outlet>
+        </div>
+        <footer class="footer" #footer>
+            <div>
+                <p>
+                    © 2023  Rakotoarimalala Rovantsoa Tsiory  -  Rakotomamonjy Nambinina Henintsoa Alicia
+                </p>
+            </div>
+        </footer>
+        
     </mat-sidenav-content>
 </mat-sidenav-container>
 
