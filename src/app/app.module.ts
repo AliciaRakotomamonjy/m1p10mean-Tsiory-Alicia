@@ -35,6 +35,7 @@ import { LoginFinancierComponent } from './components/login-financier/login-fina
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     TemplateAtelierComponent,
     LoginAtelierComponent,
     LoginFinancierComponent,
-    ErrorComponent
+    ErrorComponent,
+    MesVoituresComponent
   ],
   imports: [
     HttpClientModule,

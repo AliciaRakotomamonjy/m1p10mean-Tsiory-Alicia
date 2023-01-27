@@ -7,7 +7,7 @@
     >
         <main class="d-flex flex-nowrap">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-                
+
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                   <img class="bi pe-none me-2" width="40" height="32" src="../../../assets/img/garage (2).png" >
                   <span class="fs-4">Garage</span>
@@ -29,14 +29,14 @@
                             <div matListItemTitle>Se déconnecter</div>
                           </mat-list-item>
                     </mat-nav-list>
-                    
+
                 </div>
               </div>
-              
+
         </main>
-        
+
     </mat-sidenav>
-   
+
     <mat-sidenav-content class="sidenav-content">
        <mat-toolbar class="bg-primary" >
             <button
@@ -49,11 +49,11 @@
             </button>
             <span *ngIf="!drawer.opened" > <mat-icon> directions_car</mat-icon> Garage</span>
             <span class="example-spacer"></span>
-            
-            
+
+
             <mat-nav-list class="nav nav-pills flex-column mb-auto">
                 <mat-list-item [matMenuTriggerFor]="menu">
-                    <img matListItemIcon src="../../../assets/img/man.png" alt="" width="60" height="60" class="rounded-circle me-2"> 
+                    <img matListItemIcon src="../../../assets/img/man.png" alt="" width="60" height="60" class="rounded-circle me-2">
                     <div matListItemTitle>Jean</div>
                   </mat-list-item>
             </mat-nav-list>
@@ -68,5 +68,8 @@
                 </button>
             </mat-menu>
         </mat-toolbar>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
