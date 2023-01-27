@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -10,10 +10,12 @@ import { UsersService } from '../users.service';
 })
 export class UserCreateComponent implements OnInit, OnDestroy {
   isLoading = false;
+  isSuccess = false;
 
   constructor(
     public usersService: UsersService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -24,20 +26,34 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
-    this.isLoading = false;
     console.log(form.value);
+    this.isLoading = true;
+    this.usersService
+      .addUser(
+        form.value.nom,
+        form.value.prenom,
+        form.value.date,
+        form.value.email,
+        form.value.password
+      )
+      .subscribe(
+        (responseData) => {
+          // const id = responseData.userId;
+          // user._id = id;
+          console.log(responseData);
+          // return responseData;
+          this.isLoading = false;
+          this.isSuccess = true;
+          form.resetForm();
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          console.error('request failed : ' + error);
+          this.isLoading = false;
+        }
+      );
 
-    this.usersService.addUser(
-      form.value.nom,
-      form.value.prenom,
-      form.value.date,
-      form.value.email,
-      form.value.password
-    );
-    form.resetForm();
   }
 
-  ngOnDestroy(): void {
-
-  }
+  ngOnDestroy(): void {}
 }

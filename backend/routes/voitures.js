@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Voiture = require("../models/Voiture");
 const Reparationroute = require("./reparation");
+const VoitureService = require("../services/voiture-service");
+const { asyncScheduler } = require("rxjs");
 
-router.get("/", (req, res, next) => {
+router.get("/:personne", (req, res, next) => {
   //console.log(req.query);
-  Voiture.find({ personne: "" })
+  Voiture.find({ personne: req.params.personne })
     .then((vtr) => {
       res.status(200).json({
         message: "Liste des voitures bien recu!",
@@ -19,12 +21,39 @@ router.get("/", (req, res, next) => {
     });
 });
 
+router.get("/me/:personne", async (req, res) => {
+  const user = req.params.personne;
+  let array = [];
+
+  await Voiture.find({ personne: user })
+    .exec()
+    .then(async (result) => {
+      for(let i=0;i<result.length;i++){
+        let etatgarage = await VoitureService.voitureenGarageouNon(result[i]);
+        let valiny = {
+          voiture : result[i],
+          etat : etatgarage
+        }
+        array.push(valiny);
+      }
+      res.status(200).json({
+        message : "Mes voitures sont biens recuperer",
+        mesvoitures : array
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).json({
+        message: error
+      })
+    });
+});
 
 router.post("/", (req, res, next) => {
   //console.log(req.query);
   const voiture = new Voiture({
     matricule: req.body.matricule,
-    personne: req.userData.userId,
+    personne: req.body.personne,
     // personne: '63cf8cf7b1494e88fdafc680',
   });
   voiture
@@ -77,14 +106,21 @@ router.put("/:id", (req, res, next) => {
     // personne: req.userData.userId,
     personne: req.userData.userId,
   });
-  Voiture.updateOne({ _id: req.params.id, personne: req.userData.userId }, voiture)
+  Voiture.updateOne(
+    { _id: req.params.id, personne: req.userData.userId },
+    voiture
+  )
     .then((result) => {
       console.log("-----");
       console.log(result);
       if (result.modifiedCount > 0) {
         res.status(200).json({ message: "Update successful!" });
       } else {
-        res.status(401).json({ message: "Not authorized ou Aucune modification na ete faites" });
+        res
+          .status(401)
+          .json({
+            message: "Not authorized ou Aucune modification na ete faites",
+          });
       }
     })
     .catch((error) => {

@@ -13,12 +13,6 @@ export class UsersService{
   addUser(nom:string, prenom:string,  date_naissance:Date,email : string,mdp:string){
     const user: User = {_id:"id",nom:nom,prenom:prenom,date_naissance:date_naissance,email:email,mdp:mdp};
     console.log(user);
-    this.http.post<{message:string, userId: string}>(environment +'/users',user)
-    .subscribe((responseData)=> {
-      const id = responseData.userId;
-      user._id = id;
-      console.log(responseData);
-      this.router.navigate(['/']);
-    });
+    return this.http.post<{message:string, userId: string}>(environment.apiUrl +'/users',user);
   }
 }

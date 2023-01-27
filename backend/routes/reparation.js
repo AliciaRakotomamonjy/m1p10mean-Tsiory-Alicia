@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Reparation = require("../models/Reparation");
 var mongoose = require("mongoose");
+const ReparationJoinTypeReparation = require("../models/ReparationJoinTypeReparation");
+require("../models/TypeReparation");
+require("../models/Voiture");
 
 router.post("/", (req, res, next) => {
   Reparation.count({
@@ -51,13 +54,16 @@ router.post("/recuperervoiture", (req, res, next) => {
         message: "Le voiture n'est pas encore recuperable",
       });
     } else {
-      Reparation.updateOne({_id:req.body.id,voiture:req.body.voiture}, {
-        date_sortie: Date.now(),
-        etat:6
-      })
+      Reparation.updateOne(
+        { _id: req.body.id, voiture: req.body.voiture },
+        {
+          date_sortie: Date.now(),
+          etat: 6,
+        }
+      )
         .then((result) => {
           console.log(result);
-            res.status(200).json({ message: "Voiture Bien recuperer!" });
+          res.status(200).json({ message: "Voiture Bien recuperer!" });
         })
         .catch((error) => {
           res.status(500).json({
@@ -73,6 +79,47 @@ router.get("/histo/:id", (req, res, next) => {
     .then((repara) => {
       if (repara) {
         res.status(200).json(repara);
+      } else {
+        res.status(404).json({ message: "Aucun reparation non trouvee!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: `repara non recuperer pour cause : ${error}`,
+      });
+    });
+});
+
+router.get("/", (req, res, next) => {
+  Reparation.find()
+    .then((repara) => {
+      if (repara) {
+        res.status(200).json(repara);
+      } else {
+        res.status(404).json({ message: "Aucun reparation non trouvee!" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: `repara non recuperer pour cause : ${error}`,
+      });
+    });
+});
+
+router.get("/reparationencours/:voiture", async (req, res, next) => {
+  await Reparation.findOne({ voiture: req.params.voiture, etat: { $ne: 6 } })
+    .populate("voiture")
+    .then(async (repara) => {
+      if (repara) {
+        console.log(repara._id);
+        let detailsreparation = await ReparationJoinTypeReparation.find({
+          reparation: repara._id,
+        }).populate("type_reparation");
+        console.log(detailsreparation);
+        res.status(200).json({
+          reparation: repara,
+          detailsreparations: detailsreparation,
+        });
       } else {
         res.status(404).json({ message: "Aucun reparation non trouvee!" });
       }
