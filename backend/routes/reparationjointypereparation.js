@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const ReparationJoinTypeReparation = require("../models/ReparationJoinTypeReparation");
-var mongoose = require("mongoose");
 require('../models/TypeReparation');
+var mongoose = require("mongoose");
 
 router.get("/:id", (req, res, next) => {
   ReparationJoinTypeReparation.find({"reparation":mongoose.Types.ObjectId(req.params.id)})

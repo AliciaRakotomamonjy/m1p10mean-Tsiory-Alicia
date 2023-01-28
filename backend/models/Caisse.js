@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const CaisseSchema = new Schema({
     entree : {
-        type : Number 
+        type : Number
     },
     sortie : {
         type : Number
@@ -12,7 +12,7 @@ const CaisseSchema = new Schema({
     date_mouvement : {
         type : Date,
         required : true,
-        default: Date.now 
+        default: Date.now
     }
 },{collection: "caisse"});
 

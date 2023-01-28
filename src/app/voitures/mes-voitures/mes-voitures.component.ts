@@ -3,6 +3,7 @@ import { VoitureService } from '../voitures.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MyCar } from '../mesvoitures.model';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'mes-voitures',
@@ -19,7 +20,8 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
   constructor(
     public voitureservice: VoitureService,
     public route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -43,4 +45,18 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(CreationVoiture);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+
+@Component({
+  selector: 'creationVoiture',
+  templateUrl: 'creation-voiture.component.html',
+})
+export class CreationVoiture {}

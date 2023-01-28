@@ -1,18 +1,34 @@
-<h1 class="headline-1">Liste des mes voitures</h1>
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Matricule</th>
-    <th>Etat</th>
-    <th></th>
+<div>
+  <button mat-button class="creer" (click)="openDialog()">Creer une nouvelle voiture</button>
+</div>
+<hr>
+<div>
+  <h1 class="headline-1">Liste des mes voitures</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Matricule</th>
+      <th>Etat</th>
+      <th></th>
 
-  </tr>
-  <tr *ngFor="let car of mesvoitures">
-    <td>{{ car.voiture._id }}</td>
-    <td>{{ car.voiture.matricule }} </td>
-    <td>{{ car.etat }}</td>
-    <td style="color: transparent;"><button mat-raised-button color="primary">Modifier</button>-
-     <button mat-raised-button color="warn">Supprimer</button></td>
-  </tr>
+    </tr>
+    <tr *ngFor="let car of mesvoitures">
+      <td>{{ car.voiture._id }}</td>
+      <td>{{ car.voiture.matricule }} </td>
+      <td>{{ car.etat }}</td>
+      <td style="color: transparent;"><button mat-raised-button color="primary"
+          *ngIf="car.etat == 'Sorti du garage'">Deposer au garage</button>-<button mat-raised-button color="primary"
+          *ngIf="car.etat == 'Dans le garage'">Voir
+          les reparations</button>-
+        <button mat-raised-button color="warn" *ngIf="car.etat == 'Sorti du garage'">Supprimer</button>-<button
+          mat-raised-button color="accent" *ngIf="car.etat == 'Sorti du garage'">Modifier</button>-<button
+          mat-raised-button>Historique</button>-<button mat-raised-button *ngIf="car.etat == 'Dans le garage'">Voir
+          la
+          facture</button>-<button mat-raised-button color="warn" *ngIf="car.etat == 'Dans le garage'">Recuperer la
+          voiture</button>
+      </td>
 
-</table>
+    </tr>
+
+  </table>
+</div>
