@@ -4,6 +4,7 @@ const Reparation = require("../models/Reparation");
 var mongoose = require("mongoose");
 const ReparationJoinTypeReparation = require("../models/ReparationJoinTypeReparation");
 require("../models/TypeReparation");
+require("../models/Voiture");
 
 router.post("/", (req, res, next) => {
   Reparation.count({
@@ -107,6 +108,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/reparationencours/:voiture", async (req, res, next) => {
   await Reparation.findOne({ voiture: req.params.voiture, etat: { $ne: 6 } })
+    .populate("voiture")
     .then(async (repara) => {
       if (repara) {
         console.log(repara._id);
