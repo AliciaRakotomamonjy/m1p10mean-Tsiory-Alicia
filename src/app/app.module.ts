@@ -36,6 +36,7 @@ import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CreationVoiture, MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
+import { ReparationEncoursComponent } from './reparations/reparation-en-cours/reparation-en-cours.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { CreationVoiture, MesVoituresComponent } from './voitures/mes-voitures/m
     LoginFinancierComponent,
     ErrorComponent,
     MesVoituresComponent,
-    CreationVoiture
+    CreationVoiture,
+    ReparationEncoursComponent
   ],
   imports: [
     HttpClientModule,
