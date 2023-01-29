@@ -38,6 +38,16 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
       });
   }
 
+  Deposeraugarage(id:string){
+    console.log("ok");
+    this.isLoading = true;
+    this.voitureservice.deposeraugarage(id).subscribe(() => {
+      this.voitureservice.getmyCar();
+    }, () => {
+      this.isLoading = false;
+    });
+  }
+
   ngOnDestroy() {}
 }
 

@@ -51,4 +51,12 @@ export class VoitureService {
       .post<any>(BACKEND_URL, voiture)
       .subscribe((response) => this.router.navigate(['/mesvoitures']));
   }
+
+  deposeraugarage(idvoiture:string){
+    const URL = environment.apiUrl + '/reparation';
+    const voiture = {
+      voiture:idvoiture
+    }
+    return this.http.post<any>(URL,voiture);
+  }
 }
