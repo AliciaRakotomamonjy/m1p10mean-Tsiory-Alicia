@@ -3,6 +3,7 @@ const router = express.Router();
 const Personne = require("../models/Personne");
 const Typepersonne = require("../models/TypePersonne");
 const bcrypt = require("bcrypt");
+const emailservice = require('../services/sendemail');
 
 /* GET users listing. */
 router.get("/", async (req, res, next) => {
@@ -39,6 +40,7 @@ router.post("", (req, res, next) => {
         pers
           .save()
           .then((persCreated) => {
+            emailservice.sendemail();
             res.status(201).json({
               message: "User added successfulyy",
               persId: persCreated._id,
