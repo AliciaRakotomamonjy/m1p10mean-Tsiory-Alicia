@@ -4,7 +4,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
-require("./backend/dotenv");
+// require("./backend/dotenv");
 
 const indexRouter = require("./backend/routes/index");
 const usersRouter = require("./backend/routes/users");
@@ -16,7 +16,7 @@ const detailsreparationsRouter = require("./backend/routes/reparationjointyperep
 mongoose.set("strictQuery", false);
 
 mongoose
-  .connect(process.env.DB_URL, { useUnifiedTopology: true })
+  .connect("mongodb+srv://root:root123456789@cluster0.eqwhlbk.mongodb.net/db-garage?retryWrites=true&w=majority", { useUnifiedTopology: true })
   .then(() => {
     console.log("Database connection successful !");
 
