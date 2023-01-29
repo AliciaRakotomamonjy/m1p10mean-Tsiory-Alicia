@@ -3,11 +3,11 @@
 demo/**
 docs/**
 
-node_modules/
-karma
-jasmine-core
-karma-chrome-launcher
-karma-coverage
-karma-jasmine
-karma-jasmine-html-reporter
-nodemon
+
+node_modules/karma
+node_modules/jasmine-core
+node_modules/karma-chrome-launcher
+node_modules/karma-coverage
+node_modules/karma-jasmine
+node_modules/karma-jasmine-html-reporter
+node_modules/nodemon
