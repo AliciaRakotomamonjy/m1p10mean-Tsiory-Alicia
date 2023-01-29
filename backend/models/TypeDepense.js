@@ -7,6 +7,8 @@ const TypeDepenseSchema = new Schema({
         type : String,
         required : true  
     }
+},{
+    collection : "type-depense"
 });
 
 const TypeDepense = mongoose.model("TypeDepense",TypeDepenseSchema);

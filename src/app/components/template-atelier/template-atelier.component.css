@@ -39,13 +39,13 @@ body {
 } */
 
 footer {
-  position: fixed;
+  /* position: fixed; */
   bottom: 0; 
   height: 40px; 
   width: 100%;
-  text-align: center; 
-  align-items: center; 
-  vertical-align: middle;
+   text-align: center; 
+  /*align-items: center; 
+  vertical-align: middle; */
   background-color: #94ABD6; 
   margin: auto;
 }

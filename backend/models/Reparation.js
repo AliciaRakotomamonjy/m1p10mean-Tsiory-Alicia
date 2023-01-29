@@ -9,6 +9,7 @@ const ReparationSchema = new Schema({
     },
     etat : {
         type: Number,
+        ref: "Etat",
         default: 0 //depot
     },
     date_depot : {
@@ -25,7 +26,6 @@ const ReparationSchema = new Schema({
         ref: 'TypeReparation'
     }]
 }, { collection: 'reparations' });
-
 const Reparation = mongoose.model("Reparation",ReparationSchema);
 
 module.exports = Reparation;

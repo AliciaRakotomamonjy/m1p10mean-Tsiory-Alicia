@@ -18,7 +18,7 @@ const PersonneSchema = new Schema({
     },
     email : {
         type : String,
-        required : true ,
+        required : true,
         unique:true
     },
     mdp: {
@@ -35,6 +35,6 @@ const PersonneSchema = new Schema({
 
 PersonneSchema.plugin(uniqueValidator);
 
-const Personne = mongoose.model("personne",PersonneSchema);
+const Personne = mongoose.model("Personne",PersonneSchema);
 
 module.exports = Personne;
