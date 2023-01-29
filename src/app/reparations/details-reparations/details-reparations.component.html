@@ -1,0 +1,28 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngIf="detailsrepa$ | async as car">
+  <h1 class="headline-1">Details Reparations</h1>
+  <div *ngIf="car.data.reparation as rep">
+    <p>ID : {{ rep._id }}</p>
+    <p>Etat : {{ rep.etat }}</p>
+    <p>Voiture matricule : {{ rep.voiture.matricule }}</p>
+    <p>Proprietaire : {{ rep.voiture.personne }}</p>
+    <p>Date de depot : {{ rep.date_depot }}</p>
+    <p>Date de debut de reparation : {{ rep.date_debut_reparation }}</p>
+
+  </div>
+  <table>
+    <tr>
+      <th>Libelle</th>
+      <th>Montant</th>
+      <th>Avancement</th>
+
+    </tr>
+    <tr *ngFor="let details of car.data.detailsreparations" >
+      <td>{{ details.type_reparation.libelle }}</td>
+      <td>{{ details.type_reparation.montant }}</td>
+      <td>{{ details.avancement }}</td>
+
+    </tr>
+
+  </table>
+</div>

@@ -4,28 +4,29 @@ const Voiture = require("../models/Voiture");
 const Reparationroute = require("./reparation");
 const VoitureService = require("../services/voiture-service");
 const { asyncScheduler } = require("rxjs");
+const method = require("../security/method");
+var mongoose = require("mongoose");
 
-router.get("/:personne", (req, res, next) => {
-  //console.log(req.query);
-  Voiture.find({ personne: req.params.personne })
-    .then((vtr) => {
-      res.status(200).json({
-        message: "Liste des voitures bien recu!",
-        voiture: vtr,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: `Liste des voitures pour cause : ${error}`,
-      });
-    });
-});
+// router.get("/:personne", (req, res, next) => {
+//   //console.log(req.query);
+//   Voiture.find({ personne: req.params.personne })
+//     .then((vtr) => {
+//       res.status(200).json({
+//         message: "Liste des voitures bien recu!",
+//         voiture: vtr,
+//       });
+//     })
+//     .catch((error) => {
+//       res.status(500).json({
+//         message: `Liste des voitures pour cause : ${error}`,
+//       });
+//     });
+// });
 
-router.get("/me/:personne", async (req, res) => {
-  const user = req.params.personne;
+router.get("/me",method.ensureToken, async (req, res) => {
   let array = [];
-
-  await Voiture.find({ personne: user })
+  console.log(req.userData);
+  await Voiture.find({ personne: req.userData.userId })
     .exec()
     .then(async (result) => {
       for(let i=0;i<result.length;i++){
@@ -49,11 +50,11 @@ router.get("/me/:personne", async (req, res) => {
     });
 });
 
-router.post("/", (req, res, next) => {
-  //console.log(req.query);
+router.post("/",method.ensureToken, (req, res, next) => {
+  console.log(req.body);
   const voiture = new Voiture({
     matricule: req.body.matricule,
-    personne: req.body.personne,
+    personne: req.userData.userId,
     // personne: '63cf8cf7b1494e88fdafc680',
   });
   voiture
@@ -74,12 +75,12 @@ router.post("/", (req, res, next) => {
     });
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id",method.ensureToken, async (req, res, next) => {
   // console.log(req.params.id);
   // console.log(req.userData);
-  const check = Reparationroute.checkvoitureinreparation(req.params.id);
+  const check = await VoitureService.checkvoitureinreparation(req.params.id);
   if (!check) {
-    Voiture.deleteOne({ _id: req.params.id, personne: req.userData.userId })
+    Voiture.deleteOne({ _id: mongoose.Types.ObjectId(req.params.id), personne: mongoose.Types.ObjectId(req.userData.userId) })
       .then((result) => {
         // console.log('------');
         // console.log(result);

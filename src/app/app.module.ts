@@ -34,7 +34,11 @@ import { LoginFinancierComponent } from './components/login-financier/login-fina
 import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CreationVoiture, MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
+import {  MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
+import { ReparationEncoursComponent } from './reparations/reparation-en-cours/reparation-en-cours.component';
+import { CreationVoiture } from './voitures/voiture-create/car-create.component';
+import { HistoComponent } from './historique/historique.component';
+import { DetailsReparComponent } from './reparations/details-reparations/details-reparations.component';
 
 import { KanboardComponent } from './components/kanboard/kanboard.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -56,7 +60,10 @@ import { DetailReparationComponent } from './components/detail-reparation/detail
     MesVoituresComponent,
     CreationVoiture,
     KanboardComponent,
-    DetailReparationComponent
+    DetailReparationComponent,
+    ReparationEncoursComponent,
+    HistoComponent,
+    DetailsReparComponent
   ],
   imports: [
     HttpClientModule,

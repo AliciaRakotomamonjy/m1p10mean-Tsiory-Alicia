@@ -11,32 +11,34 @@ import { FinancierGuard } from './helpers/financier.guard';
 import { UserAuthComponent } from './users/user-auth/user-auth.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { CreationVoiture } from './voitures/voiture-create/car-create.component';
+import { ReparationEncoursComponent } from './reparations/reparation-en-cours/reparation-en-cours.component';
 import { MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
 import { KanboardComponent } from './components/kanboard/kanboard.component';
+import { HistoComponent } from './historique/historique.component';
+import { DetailsReparComponent } from './reparations/details-reparations/details-reparations.component';
 
-// const routes: Routes = [
-//   {
-//     path: '',
-//     component: TemplateComponent,
-//     canActivate: [AuthGuard],
-//     children: [
-//       { path: 'mesvoitures/:idpersonne', component: MesVoituresComponent },
-//     ],
-//   },
-//   { path: 'user-list', component: UserListComponent },
-//   { path: 'user-create', component: UserCreateComponent },
-//   { path: 'login', component: LoginComponent },
-//   { path: 'login-atelier', component: LoginAtelierComponent },
-//   { path: 'login-financier', component: LoginFinancierComponent },
 
 
 const routes: Routes = [
-  { path : "", pathMatch: "full", redirectTo: "client" },
   { path : 'client', component: TemplateComponent, canActivate: [ClientGuard] },
   { path : 'atelier', component: TemplateAtelierComponent, 
     children : [
       { path : 'kanboard', component : KanboardComponent },
     ]
+  },
+  {
+    path: '',
+    component: TemplateComponent,
+    canActivate: [ClientGuard],
+    children: [
+      { path: 'mesvoitures', component: MesVoituresComponent },
+      { path: 'reparationencours/:idvoiture', component: ReparationEncoursComponent },
+      { path: 'creer-voiture', component: CreationVoiture },
+      { path: 'historique/:idvoiture', component: HistoComponent },
+      { path: 'details/:idreparation', component: DetailsReparComponent },
+
+    ],
   },
   { path : 'user-list', component:UserListComponent },
   { path : 'user-create', component:UserCreateComponent },

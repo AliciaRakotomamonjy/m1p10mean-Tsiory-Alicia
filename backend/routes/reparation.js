@@ -118,8 +118,11 @@ router.get("/reparationencours/:voiture", async (req, res, next) => {
         }).populate("type_reparation");
         console.log(detailsreparation);
         res.status(200).json({
-          reparation: repara,
-          detailsreparations: detailsreparation,
+          message: "Donnees bien recuperer",
+          data: {
+            reparation: repara,
+            detailsreparations: detailsreparation,
+          },
         });
       } else {
         res.status(404).json({ message: "Aucun reparation non trouvee!" });
