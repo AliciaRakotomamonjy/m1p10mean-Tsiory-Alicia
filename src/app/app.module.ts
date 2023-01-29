@@ -38,6 +38,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {  MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
 import { ReparationEncoursComponent } from './reparations/reparation-en-cours/reparation-en-cours.component';
 import { CreationVoiture } from './voitures/voiture-create/car-create.component';
+import { HistoComponent } from './historique/historique.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { CreationVoiture } from './voitures/voiture-create/car-create.component'
     ErrorComponent,
     MesVoituresComponent,
     CreationVoiture,
-    ReparationEncoursComponent
+    ReparationEncoursComponent,
+    HistoComponent
   ],
   imports: [
     HttpClientModule,

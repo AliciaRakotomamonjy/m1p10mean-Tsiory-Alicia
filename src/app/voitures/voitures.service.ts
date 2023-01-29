@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { map, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { environment } from '../../environments';
 import { MyCar } from './mesvoitures.model';
 
@@ -58,5 +58,18 @@ export class VoitureService {
       voiture:idvoiture
     }
     return this.http.post<any>(URL,voiture);
+  }
+
+  recupereraugarage(idvoiture:string){
+    const URL = environment.apiUrl + '/reparation/recuperervoiture';
+    const voiture = {
+      voiture:idvoiture
+    }
+    return this.http.post<any>(URL,voiture);
+  }
+
+  historique(id:string): Observable<any> {
+    const URL = environment.apiUrl + '/reparation/histo/';
+    return this.http.get<any>(URL + id);
   }
 }

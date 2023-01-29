@@ -10,25 +10,25 @@
       <th>Matricule</th>
       <th>Etat</th>
       <th></th>
-
     </tr>
     <tr *ngFor="let car of mesvoitures">
       <td>{{ car.voiture._id }}</td>
       <td>{{ car.voiture.matricule }} </td>
       <td>{{ car.etat }}</td>
-      <td style="color: transparent;"><button mat-raised-button color="primary"
-          *ngIf="car.etat == 'Sorti du garage'" (click)="Deposeraugarage(car.voiture._id)">Deposer au garage</button>-<button mat-raised-button color="primary"
-          *ngIf="car.etat == 'Dans le garage'" [routerLink]="['/reparationencours',car.voiture._id]">Voir
+      <td style="color: transparent;"><button mat-raised-button color="primary" *ngIf="car.etat == 'Sorti du garage'"
+          (click)="Deposeraugarage(car.voiture._id)">Deposer au garage</button>-<button mat-raised-button
+          color="primary" *ngIf="car.etat == 'Dans le garage'"
+          [routerLink]="['/reparationencours',car.voiture._id]">Voir
           les reparations</button>-
         <button mat-raised-button color="warn" *ngIf="car.etat == 'Sorti du garage'">Supprimer</button>-<button
           mat-raised-button color="accent" *ngIf="car.etat == 'Sorti du garage'">Modifier</button>-<button
-          mat-raised-button>Historique</button>-<button mat-raised-button *ngIf="car.etat == 'Dans le garage'">Voir
+          mat-raised-button [routerLink]="['/historique',car.voiture._id]">Historique</button>-<button mat-raised-button *ngIf="car.etat == 'Dans le garage'"
+          [routerLink]="['/reparationencours',car.voiture._id]">Voir
           la
-          facture</button>-<button mat-raised-button color="warn" *ngIf="car.etat == 'Dans le garage'">Recuperer la
+          facture</button>-<button mat-raised-button color="warn" *ngIf="car.etat == 'Dans le garage'"
+          (click)="RecupererVoiture(car.voiture._id)">Recuperer la
           voiture</button>
       </td>
-
     </tr>
-
   </table>
 </div>

@@ -11,6 +11,7 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { CreationVoiture } from './voitures/voiture-create/car-create.component';
 import { ReparationEncoursComponent } from './reparations/reparation-en-cours/reparation-en-cours.component';
 import { MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
+import { HistoComponent } from './historique/historique.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
       { path: 'mesvoitures', component: MesVoituresComponent },
       { path: 'reparationencours/:idvoiture', component: ReparationEncoursComponent },
       { path: 'creer-voiture', component: CreationVoiture },
-
+      { path: 'historique/:idvoiture', component: HistoComponent },
     ],
   },
   { path: 'user-list', component: UserListComponent },

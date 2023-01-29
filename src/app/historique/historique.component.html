@@ -1,0 +1,23 @@
+<div *ngIf="historique$ | async as histo">
+  <h1 class="headline-1">Historique de reparation du vehicule {{ idvoiture }}</h1>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>etat</th>
+      <th>Date debut reparation</th>
+      <th>Date fin de reparation</th>
+      <th>Date de sortie</th>
+      <th>Date de depot de voiture</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let data of histo">
+      <td>{{ data._id }}</td>
+      <td>{{ data.etat }}</td>
+      <td>{{ data.date_debut_reparation }}</td>
+      <td>{{ data.date_fin_reparation }}</td>
+      <td>{{ data.date_fin_reparation }}</td>
+      <td>{{ data.date_depot }}</td>
+      <td><button mat-raised-button color="primary" >Details</button></td>
+    </tr>
+  </table>
+</div>

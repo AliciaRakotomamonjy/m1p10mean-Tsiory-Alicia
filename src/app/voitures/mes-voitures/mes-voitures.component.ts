@@ -48,6 +48,16 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
     });
   }
 
+  RecupererVoiture(id:string){
+    console.log("recuperation en cours");
+    this.isLoading = true;
+    this.voitureservice.recupereraugarage(id).subscribe(() => {
+      this.voitureservice.getmyCar();
+    }, () => {
+      this.isLoading = false;
+    });
+  }
+
   ngOnDestroy() {}
 }
 

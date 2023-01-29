@@ -75,7 +75,7 @@ router.post("/recuperervoiture", (req, res, next) => {
 });
 
 router.get("/histo/:id", (req, res, next) => {
-  Reparation.find({ voiture: req.params.id, etat: 6 })
+  Reparation.find({ voiture: req.params.id})
     .then((repara) => {
       if (repara) {
         res.status(200).json(repara);
