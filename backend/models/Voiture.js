@@ -5,12 +5,13 @@ const Schema = mongoose.Schema
 const VoitureSchema = new Schema({
     matricule : {
         type : String,
-        required : true  
+        required : true,
+        unique: true
     },
     personne : {
         type: Schema.Types.ObjectId,
         ref : "Personne",
-        required : true 
+        required : true
     }
 });
 

@@ -8,8 +8,9 @@ import { ClientGuard } from './helpers/client.guard';
 import { UserAuthComponent } from './users/user-auth/user-auth.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserListComponent } from './users/user-list/user-list.component';
-import { MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
+import { CreationVoiture } from './voitures/voiture-create/car-create.component';
 import { ReparationEncoursComponent } from './reparations/reparation-en-cours/reparation-en-cours.component';
+import { MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,8 @@ const routes: Routes = [
     children: [
       { path: 'mesvoitures', component: MesVoituresComponent },
       { path: 'reparationencours/:idvoiture', component: ReparationEncoursComponent },
+      { path: 'creer-voiture', component: CreationVoiture },
+
     ],
   },
   { path: 'user-list', component: UserListComponent },

@@ -39,18 +39,6 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {}
-
-  openDialog() {
-    const dialogRef = this.dialog.open(CreationVoiture);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
 }
 
-@Component({
-  selector: 'creationVoiture',
-  templateUrl: 'creation-voiture.component.html',
-})
-export class CreationVoiture {}
+

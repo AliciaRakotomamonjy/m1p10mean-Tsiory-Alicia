@@ -1,0 +1,26 @@
+<div class="authentication-card-container" fxLayout="column" fxLayoutAlign="center">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <mat-card class="success" *ngIf="isSuccess">
+      <mat-card-content>Utilisateur bien creer, veuillez connecter</mat-card-content>
+    </mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h1>Nouvelle Voiture</h1>
+      </mat-card-title>
+    </mat-card-header>
+    <hr>
+    <mat-card-content>
+      <form (submit)="Creervoiture(carForm)" #carForm="ngForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Matricule</mat-label>
+          <input matInput type="text" name="matricule" #matricule="ngModel" ngModel required>
+          <mat-error *ngIf="matricule.invalid">Le champ Matricule est requis</mat-error>
+        </mat-form-field>
+
+        <mat-card-actions>
+          <button mat-flat-button type="submit" color="primary" *ngIf="!isLoading">Valider</button>
+        </mat-card-actions>
+
+      </form>
+    </mat-card-content>
+</div>

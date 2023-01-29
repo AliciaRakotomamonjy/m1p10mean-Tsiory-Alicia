@@ -49,11 +49,11 @@ router.get("/me",method.ensureToken, async (req, res) => {
     });
 });
 
-router.post("/", (req, res, next) => {
-  //console.log(req.query);
+router.post("/",method.ensureToken, (req, res, next) => {
+  console.log(req.body);
   const voiture = new Voiture({
     matricule: req.body.matricule,
-    personne: req.body.personne,
+    personne: req.userData.userId,
     // personne: '63cf8cf7b1494e88fdafc680',
   });
   voiture

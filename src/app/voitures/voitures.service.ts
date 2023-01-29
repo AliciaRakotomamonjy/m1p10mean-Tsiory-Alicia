@@ -17,12 +17,12 @@ export class VoitureService {
 
   getmyCar() {
     this.http
-      .get<{ message:string; mesvoitures: any }>(BACKEND_URL + '/me')
+      .get<{ message: string; mesvoitures: any }>(BACKEND_URL + '/me')
       .pipe(
         map((responseData) => {
           // console.log(responseData);
           return {
-            mesvoitures: responseData.mesvoitures.map((car:any) => {
+            mesvoitures: responseData.mesvoitures.map((car: any) => {
               console.log(car);
               return {
                 voiture: car.voiture,
@@ -40,5 +40,15 @@ export class VoitureService {
   }
   getCarUpdateListener() {
     return this.carUpdated.asObservable();
+  }
+
+  createVoiture(matricule: string) {
+    const voiture = {
+      matricule : matricule
+    }
+    console.log(BACKEND_URL);
+    this.http
+      .post<any>(BACKEND_URL, voiture)
+      .subscribe((response) => this.router.navigate(['/mesvoitures']));
   }
 }
