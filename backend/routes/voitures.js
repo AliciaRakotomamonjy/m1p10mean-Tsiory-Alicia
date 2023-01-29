@@ -4,28 +4,28 @@ const Voiture = require("../models/Voiture");
 const Reparationroute = require("./reparation");
 const VoitureService = require("../services/voiture-service");
 const { asyncScheduler } = require("rxjs");
+const method = require("../security/method");
 
-router.get("/:personne", (req, res, next) => {
-  //console.log(req.query);
-  Voiture.find({ personne: req.params.personne })
-    .then((vtr) => {
-      res.status(200).json({
-        message: "Liste des voitures bien recu!",
-        voiture: vtr,
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        message: `Liste des voitures pour cause : ${error}`,
-      });
-    });
-});
+// router.get("/:personne", (req, res, next) => {
+//   //console.log(req.query);
+//   Voiture.find({ personne: req.params.personne })
+//     .then((vtr) => {
+//       res.status(200).json({
+//         message: "Liste des voitures bien recu!",
+//         voiture: vtr,
+//       });
+//     })
+//     .catch((error) => {
+//       res.status(500).json({
+//         message: `Liste des voitures pour cause : ${error}`,
+//       });
+//     });
+// });
 
-router.get("/me/:personne", async (req, res) => {
-  const user = req.params.personne;
+router.get("/me",method.ensureToken, async (req, res) => {
   let array = [];
-
-  await Voiture.find({ personne: user })
+  console.log(req.userData);
+  await Voiture.find({ personne: req.userData.userId })
     .exec()
     .then(async (result) => {
       for(let i=0;i<result.length;i++){

@@ -3,7 +3,7 @@ import { VoitureService } from '../voitures.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MyCar } from '../mesvoitures.model';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'mes-voitures',
@@ -27,21 +27,15 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     console.log('tonga ato oo');
 
-    this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      if (paramMap.has('idpersonne')) {
-        this.idpersonne = paramMap.get('idpersonne');
-        this.isLoading = true;
-        this.voitureservice.getmyCar(this.idpersonne);
-        this.carSub = this.voitureservice
-          .getCarUpdateListener()
-          .subscribe((data) => {
-            console.log(data);
-            this.isLoading = false;
-            this.mesvoitures = data.car;
-          });
-      } else {
-      }
-    });
+    this.isLoading = true;
+    this.voitureservice.getmyCar();
+    this.carSub = this.voitureservice
+      .getCarUpdateListener()
+      .subscribe((data) => {
+        console.log(data);
+        this.isLoading = false;
+        this.mesvoitures = data.car;
+      });
   }
 
   ngOnDestroy() {}
@@ -49,7 +43,7 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
   openDialog() {
     const dialogRef = this.dialog.open(CreationVoiture);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
   }

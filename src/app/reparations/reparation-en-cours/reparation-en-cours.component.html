@@ -1,3 +1,4 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 <div *ngIf="reparationencours$ | async as car">
   <h1 class="headline-1">Reparations</h1>
   <div *ngIf="car.data.reparation as rep">

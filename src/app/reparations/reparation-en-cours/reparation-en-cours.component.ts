@@ -31,6 +31,8 @@ export class ReparationEncoursComponent implements OnInit, OnDestroy {
         this.idvoiture = paramMap.get('idvoiture');
         this.isLoading = true;
         this.reparationencours$ = this.repartionserv.getReparationEnCours(this.idvoiture);
+        this.isLoading = false;
+
         console.log(this.repartionserv.getReparationEnCours(this.idvoiture));
       } else {
       }

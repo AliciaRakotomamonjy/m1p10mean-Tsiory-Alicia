@@ -31,14 +31,14 @@ export class LoginComponent implements OnInit {
     ).subscribe(
       res=>{
         localStorage.setItem(this.authenticationService.getTokenKey(), res.token);
-        this.router.navigate(['/client']);
-      }, 
+        this.router.navigate(['/mesvoitures']);
+      },
       err => {
         this.message = err.error.message
         this.loading = false;
       }
     )
 
-    
+
   }
 }

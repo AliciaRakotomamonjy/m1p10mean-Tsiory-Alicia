@@ -17,7 +17,7 @@ const routes: Routes = [
     component: TemplateComponent,
     canActivate: [ClientGuard],
     children: [
-      { path: 'mesvoitures/:idpersonne', component: MesVoituresComponent },
+      { path: 'mesvoitures', component: MesVoituresComponent },
       { path: 'reparationencours/:idvoiture', component: ReparationEncoursComponent },
     ],
   },

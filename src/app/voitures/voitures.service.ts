@@ -6,7 +6,7 @@ import { map, Subject } from 'rxjs';
 import { environment } from '../../environments';
 import { MyCar } from './mesvoitures.model';
 
-const BACKEND_URL = environment.apiUrl + '/client/voitures/';
+const BACKEND_URL = environment.apiUrl + '/client/voitures';
 
 @Injectable({ providedIn: 'root' })
 export class VoitureService {
@@ -15,9 +15,9 @@ export class VoitureService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getmyCar(id: string) {
+  getmyCar() {
     this.http
-      .get<{ message:string; mesvoitures: any }>(BACKEND_URL + '/me/' + id)
+      .get<{ message:string; mesvoitures: any }>(BACKEND_URL + '/me')
       .pipe(
         map((responseData) => {
           // console.log(responseData);
