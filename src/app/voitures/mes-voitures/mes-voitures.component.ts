@@ -59,6 +59,15 @@ export class MesVoituresComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {}
+
+  onDelete(id: string) {
+    this.isLoading = true;
+    this.voitureservice.deletecar(id).subscribe(() => {
+      this.voitureservice.getmyCar();
+    }, () => {
+      this.isLoading = false;
+    });
+  }
 }
 
 

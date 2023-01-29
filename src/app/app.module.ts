@@ -39,6 +39,7 @@ import {  MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.comp
 import { ReparationEncoursComponent } from './reparations/reparation-en-cours/reparation-en-cours.component';
 import { CreationVoiture } from './voitures/voiture-create/car-create.component';
 import { HistoComponent } from './historique/historique.component';
+import { DetailsReparComponent } from './reparations/details-reparations/details-reparations.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { HistoComponent } from './historique/historique.component';
     MesVoituresComponent,
     CreationVoiture,
     ReparationEncoursComponent,
-    HistoComponent
+    HistoComponent,
+    DetailsReparComponent
   ],
   imports: [
     HttpClientModule,

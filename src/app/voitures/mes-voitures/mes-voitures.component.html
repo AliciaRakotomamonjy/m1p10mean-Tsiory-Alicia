@@ -20,7 +20,7 @@
           color="primary" *ngIf="car.etat == 'Dans le garage'"
           [routerLink]="['/reparationencours',car.voiture._id]">Voir
           les reparations</button>-
-        <button mat-raised-button color="warn" *ngIf="car.etat == 'Sorti du garage'">Supprimer</button>-<button
+        <button mat-raised-button color="warn" *ngIf="car.etat == 'Sorti du garage'" (click)="onDelete(car.voiture._id)">Supprimer</button>-<button
           mat-raised-button color="accent" *ngIf="car.etat == 'Sorti du garage'">Modifier</button>-<button
           mat-raised-button [routerLink]="['/historique',car.voiture._id]">Historique</button>-<button mat-raised-button *ngIf="car.etat == 'Dans le garage'"
           [routerLink]="['/reparationencours',car.voiture._id]">Voir

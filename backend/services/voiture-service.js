@@ -11,6 +11,19 @@ const voitureenGarageouNon = async(carObject) => {
     return "Dans le garage"
 }
 
+const checkvoitureinreparation = async(idvoiture) => {
+  await Reparation.count({ voiture: mongoose.Types.ObjectId(idvoiture), etat: { $ne: 6 } })
+  .then((compteur) => {
+    console.log(compteur);
+    if(compteur == 0){
+      return false;
+    }else{
+      return true;
+    }
+  });
+};
+
 module.exports = {
-  voitureenGarageouNon
+  voitureenGarageouNon,
+  checkvoitureinreparation
 }

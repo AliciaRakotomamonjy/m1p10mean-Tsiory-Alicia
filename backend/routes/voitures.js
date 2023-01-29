@@ -5,6 +5,7 @@ const Reparationroute = require("./reparation");
 const VoitureService = require("../services/voiture-service");
 const { asyncScheduler } = require("rxjs");
 const method = require("../security/method");
+var mongoose = require("mongoose");
 
 // router.get("/:personne", (req, res, next) => {
 //   //console.log(req.query);
@@ -74,12 +75,12 @@ router.post("/",method.ensureToken, (req, res, next) => {
     });
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id",method.ensureToken, async (req, res, next) => {
   // console.log(req.params.id);
   // console.log(req.userData);
-  const check = Reparationroute.checkvoitureinreparation(req.params.id);
+  const check = await VoitureService.checkvoitureinreparation(req.params.id);
   if (!check) {
-    Voiture.deleteOne({ _id: req.params.id, personne: req.userData.userId })
+    Voiture.deleteOne({ _id: mongoose.Types.ObjectId(req.params.id), personne: mongoose.Types.ObjectId(req.userData.userId) })
       .then((result) => {
         // console.log('------');
         // console.log(result);

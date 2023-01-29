@@ -15,4 +15,8 @@ export class ReparationService {
   getReparationEnCours(id: string): Observable<any> {
     return this.http.get<any>(BACKEND_URL + '/reparationencours/' + id);
   }
+  getDetailsReparations(id:string): Observable<any>{
+    const URL = environment.apiUrl + '/detailsreparation/';
+    return this.http.get<any>(URL + id);
+  }
 }

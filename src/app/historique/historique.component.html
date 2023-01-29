@@ -17,7 +17,7 @@
       <td>{{ data.date_fin_reparation }}</td>
       <td>{{ data.date_fin_reparation }}</td>
       <td>{{ data.date_depot }}</td>
-      <td><button mat-raised-button color="primary" >Details</button></td>
+      <td><button mat-raised-button color="primary" [routerLink]="['/details',data._id]">Details</button></td>
     </tr>
   </table>
 </div>

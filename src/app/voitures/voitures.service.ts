@@ -72,4 +72,8 @@ export class VoitureService {
     const URL = environment.apiUrl + '/reparation/histo/';
     return this.http.get<any>(URL + id);
   }
+
+  deletecar(id:String){
+    return this.http.delete(BACKEND_URL +'/'+ id);
+  }
 }
