@@ -8,6 +8,8 @@ require("./backend/dotenv");
 
 const indexRouter = require('./backend/routes/index');
 const usersRouter = require('./backend/routes/users');
+const etatsRouter = require('./backend/routes/etats');
+const typeReparationsRouter = require('./backend/routes/typeReparation');
 const loginRouter = require('./backend/routes/login');
 const voitureRouter = require('./backend/routes/voitures');
 const reparationRouter = require("./backend/routes/reparation");
@@ -40,6 +42,8 @@ mongoose.connect(process.env.DB_URL,{ useUnifiedTopology: true })
   app.use('/api/login', loginRouter);
   app.use('/api/reparation',reparationRouter);
   app.use('/api/detailsreparation',detailsreparationsRouter);
+  app.use('/api/etats',etatsRouter);
+  app.use('/api/typeReparations',typeReparationsRouter);
 
   // Catch all other routes and return the index file
   app.get('*', (req, res) => {

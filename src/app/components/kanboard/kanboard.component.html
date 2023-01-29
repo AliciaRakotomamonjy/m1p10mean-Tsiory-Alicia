@@ -1,0 +1,26 @@
+
+  <div cdkDropListGroup class="row">
+    <div *ngFor="let etat of etats" class="col example-container"  >
+      <h2 style="text-align: center;">{{etat.libelle}}</h2>
+      <div
+        cdkDropList
+        [cdkDropListData]="etat.reparations"
+        class="example-list"
+        (cdkDropListDropped)="drop(etat._id,$event)"
+      >
+        
+        <div class="example-box" *ngFor="let reparation of etat.reparations" cdkDrag [cdkDragData]="reparation">
+          <div *ngIf="reparation.voiture">
+            
+            <br>{{   reparation.voiture.matricule  }}<br>
+            <button mat-stroked-button color="primary">Primary</button>
+            <!-- <div class="example-handle" cdkDragHandle>
+                <mat-icon>drag_indicator</mat-icon>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
