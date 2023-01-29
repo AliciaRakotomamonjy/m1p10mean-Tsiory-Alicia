@@ -18,7 +18,7 @@
       <td>{{ car.etat }}</td>
       <td style="color: transparent;"><button mat-raised-button color="primary"
           *ngIf="car.etat == 'Sorti du garage'">Deposer au garage</button>-<button mat-raised-button color="primary"
-          *ngIf="car.etat == 'Dans le garage'">Voir
+          *ngIf="car.etat == 'Dans le garage'" [routerLink]="['/reparationencours',car.voiture._id]">Voir
           les reparations</button>-
         <button mat-raised-button color="warn" *ngIf="car.etat == 'Sorti du garage'">Supprimer</button>-<button
           mat-raised-button color="accent" *ngIf="car.etat == 'Sorti du garage'">Modifier</button>-<button
