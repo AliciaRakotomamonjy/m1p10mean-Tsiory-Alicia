@@ -15,7 +15,6 @@ const CaisseSchema = new Schema({
         default: Date.now
     }
 },{collection: "caisse"});
-
 const Caisse = mongoose.model("Caisse",CaisseSchema);
 
 module.exports = Caisse;

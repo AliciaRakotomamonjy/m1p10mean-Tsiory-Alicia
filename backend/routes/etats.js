@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const typeReparationService = require("../services/typeReparationService");
+const etatService = require("../services/etatService");
 
 router.get("/", (req, res, next)=>{
-    typeReparationService.getTypeReparations()
+    etatService.getAllEtat()
     .then((liste) => {
         if(liste){
             res.status(200).json({
@@ -14,7 +14,7 @@ router.get("/", (req, res, next)=>{
         }else{
             res.status(404).json({
                 ok : false,
-                message : "Aucun type de réparation enregistré dans la base de données !"
+                message : "Aucun état enregistré dans la base de données !"
             })
         }
     }).catch((error)=>{
@@ -24,8 +24,9 @@ router.get("/", (req, res, next)=>{
         })
     })
 })
-router.get("/reparations/disponible/:idreparation", (req, res, next)=>{
-    typeReparationService.getTypeReparationsDisponible(req.params.idreparation)
+
+router.get("/reparations", (req, res, next)=>{
+    etatService.getAllEtatAvecReparation()
     .then((liste) => {
         if(liste){
             res.status(200).json({
@@ -36,14 +37,16 @@ router.get("/reparations/disponible/:idreparation", (req, res, next)=>{
         }else{
             res.status(404).json({
                 ok : false,
-                message : "Aucun type de réparation enregistré dans la base de données !"
+                message : "Aucun état enregistré dans la base de données !"
             })
         }
     }).catch((error)=>{
+        console.error(error)
         res.status(500).json({
             ok : false,
             message : "Une erreur s'est produite !"
         })
     })
 })
+
 module.exports = router;

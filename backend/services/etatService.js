@@ -13,16 +13,67 @@ module.exports = {
     },
     async getAllEtatAvecReparation(){
         try{
-            // const result = await Etat.find().populate({path : "reparations",model: "Reparation"}).exec();
-            const result = await Reparation.find({}).populate({path : "etat",select: "_id indice libelle",model: "Etat"});
-            // const result = await Reparation.aggregate([
-            //     {
-            //         $group: {
-            //             _id: "$etat",
-            //             reparations: { $push: "$$ROOT" }
-            //         }
-            //     }
-            // ]).exec()
+           
+            const result = Etat.aggregate([
+                {
+                    $lookup: {
+                        from: "reparations",
+                        let: { etatId: "$_id" },
+                        pipeline: [
+                            {
+                                $match: {
+                                    $expr: { $eq: ["$etat", "$$etatId"] }
+                                }
+                            }
+                        ],
+                        as: "reparations"
+                    }
+                },
+                {
+                    $unwind: {
+                        path: "$reparations",
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "voitures",
+                        localField: "reparations.voiture",
+                        foreignField: "_id",
+                        as: "reparations.voiture"
+                    }
+                },
+                {
+                    $unwind: {
+                        path: "$reparations.voiture",
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $group: {
+                        _id: "$_id",
+                        libelle: { $first: "$libelle" },
+                        reparations: { $push: "$reparations" }
+                    }
+                },{
+                    $project: {
+                        _id: 1,
+                        libelle: 1,
+                        reparations: {
+                            $cond: {
+                                if: { $eq: [ "$reparations", [{}] ] },
+                                then: [],
+                                else: "$reparations"
+                            }
+                        }
+                    }
+                },
+                {
+                    $sort : {
+                        "_id" : 1
+                    }
+                }
+            ]).exec()
             return result;
 
         }catch(error){
@@ -32,11 +83,3 @@ module.exports = {
     }
 }
 
-// db.createView("reparations_par_état", "reparations",
-//   [{
-//     $group: {
-//       _id: "$etat",
-//       reparations: { $push: "$$ROOT" }
-//     }
-//   }]
-// )

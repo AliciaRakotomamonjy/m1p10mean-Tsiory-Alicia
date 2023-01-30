@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 const ReparationJoinTypeReparation = require("../models/ReparationJoinTypeReparation");
 require("../models/TypeReparation");
 require("../models/Voiture");
+const reparationService  = require("../services/reparationService");
 
 router.post("/", (req, res, next) => {
   Reparation.count({
@@ -133,5 +134,55 @@ router.get("/reparationencours/:voiture", async (req, res, next) => {
       });
     });
 });
+
+router.get("/:id",(req,res,next)=>{
+    reparationService.getDetailReparation(req.params.id)
+    .then((reparation) => {
+      if(reparation){
+          res.status(200).json({
+              ok : true,
+              message : "Donnée récupérée avec succès !",
+              data : reparation.length === 1 ? reparation[0] : null
+          })
+      }else{
+          res.status(404).json({
+              ok : false,
+              message : "Aucune réparation enregistré dans la base de données avec cet id !"
+          })
+      }
+  }).catch((error)=>{
+      console.error(error)
+      res.status(500).json({
+          ok : false,
+          message : "Une erreur s'est produite !"
+      })
+  })
+})
+
+router.put("/:id",(req,res,next)=>{
+    reparationService.updateEtatReparation(req.params.id,req.body.etat)
+    .then((reparation) => {
+      if(reparation){
+          res.status(200).json({
+              ok : true,
+              message : "Donnée récupérée avec succès !",
+              data : reparation
+          })
+      }else{
+          res.status(404).json({
+              ok : false,
+              message : "Aucune réparation enregistré dans la base de données avec cet id !"
+          })
+      }
+  }).catch((error)=>{
+      console.error(error)
+      res.status(500).json({
+          ok : false,
+          message : "Une erreur s'est produite !"
+      })
+  })
+})
+
+
 
 module.exports = router;

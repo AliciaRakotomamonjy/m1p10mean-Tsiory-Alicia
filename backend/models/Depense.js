@@ -18,7 +18,7 @@ const DepenseSchema = new Schema({
         type : Schema.Types.ObjectId,
         ref : "TypeDepense"
     }
-});
+},{collection: "depense"});
 
 const Depense = mongoose.model("Depense",DepenseSchema);
 

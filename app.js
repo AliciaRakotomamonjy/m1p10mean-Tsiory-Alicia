@@ -6,10 +6,12 @@ const mongoose = require("mongoose");
 const app = express();
 require("./backend/dotenv");
 
-const indexRouter = require("./backend/routes/index");
-const usersRouter = require("./backend/routes/users");
-const loginRouter = require("./backend/routes/login");
-const voitureRouter = require("./backend/routes/voitures");
+const indexRouter = require('./backend/routes/index');
+const usersRouter = require('./backend/routes/users');
+const etatsRouter = require('./backend/routes/etats');
+const typeReparationsRouter = require('./backend/routes/typeReparation');
+const loginRouter = require('./backend/routes/login');
+const voitureRouter = require('./backend/routes/voitures');
 const reparationRouter = require("./backend/routes/reparation");
 const detailsreparationsRouter = require("./backend/routes/reparationjointypereparation");
 const caisseRouter = require("./backend/routes/caisse");
@@ -66,3 +68,4 @@ mongoose
     console.error("Database connection failed !");
     console.error(error);
   });
+

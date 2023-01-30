@@ -13,7 +13,7 @@ const VoitureSchema = new Schema({
         ref : "Personne",
         required : true
     }
-});
+},{collection: "voitures"});
 
 const Voiture = mongoose.model("Voiture",VoitureSchema);
 

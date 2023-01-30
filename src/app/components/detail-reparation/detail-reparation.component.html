@@ -1,0 +1,71 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div *ngIf="detailsrepa$ | async as reparation">
+  <h1 class="headline-1">{{ reparation.data && reparation.data.etat._id < 2 ? 'Diagnostic' : 'Détail de la réparation' }} </h1>
+  <div *ngIf="reparation.data as rep">
+    <mat-list role="list">
+        <hr>
+        <div mat-subheader><strong>Réparation</strong></div>
+        <mat-divider></mat-divider>
+        <mat-list-item role="listitem">Etat : {{ rep.etat.libelle }}</mat-list-item>
+        <mat-list-item role="listitem">Matricule de la voiture : {{ rep.voiture.matricule }}</mat-list-item>
+        <mat-list-item role="listitem">Date de dépot : {{ rep.date_depot }}</mat-list-item>
+    </mat-list>
+
+  </div>
+
+  <table mat-table [dataSource]="reparation.data.typereparations" class="mat-elevation-z8">
+    <!-- Item Column -->
+    <ng-container style="width:100px;padding-right: 24px;" matColumnDef="libelle">
+      <th mat-header-cell *matHeaderCellDef> Libelle </th>
+      <td mat-cell *matCellDef="let type_reparation"> {{type_reparation.libelle}} </td>
+      <td mat-footer-cell *matFooterCellDef> Total </td>
+    </ng-container>
+  
+    <!-- Cost Column -->
+    <ng-container style="width:100px;padding-right: 24px;" matColumnDef="montant">
+      <th mat-header-cell *matHeaderCellDef> Montant </th>
+      <td mat-cell *matCellDef="let type_reparation"> {{type_reparation.montant }} Ariary</td>
+      <td mat-footer-cell *matFooterCellDef> {{ totalMontant }} Ariary</td>
+    </ng-container>
+
+    <ng-container style="width:100px;padding-right: 24px;" matColumnDef="avancement">
+        <th mat-header-cell *matHeaderCellDef> Avancement </th>
+        <td mat-cell *matCellDef="let type_reparation"> {{type_reparation.avancement }} %</td>
+        <td mat-footer-cell *matFooterCellDef> {{ moyenneAvancement }} %</td>
+      </ng-container>
+
+    <ng-container  matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let type_reparation"><button mat-raised-button  (click)="openDialog(type_reparation)" >Modifier l'avancement</button> </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+  
+ 
+  <mat-selection-list #shoes>
+    <hr>
+    <div mat-subheader><strong>Type de réparation disponible</strong></div>
+    <mat-divider></mat-divider>
+    <mat-list-option *ngFor="let type of typeReparations$ | async" [value]="type._id" >
+      {{type.libelle}}
+    </mat-list-option>
+  </mat-selection-list>
+  <div>
+    <button mat-raised-button style="float: left;" [routerLink]="'/atelier/kanboard'"  >Retour au kanboard</button>
+    <button mat-raised-button style="float: right;" color="primary" (click)="validerListe(shoes)" >Valider</button>
+  </div>
+ 
+  <br>
+  <div *ngIf="isSuccess" style="width:100%" class="alert alert-success" role="alert">
+    {{message}}
+  </div>
+  <div *ngIf="isFailed" style="width:100%" class="alert alert-danger" role="alert">
+    {{message}}
+  </div>
+  
+</div>
+
