@@ -9,7 +9,6 @@ router.post("/", (req,res) => {
     let mdp = req.body.mdp
     // _id type_personne responsable client
     const type_personne = '63c02ee2a24f608157199e55'
-
     personneService.findByEmailAndTypePersonne(email,type_personne)
         .then((user)=>{
             if(!user){

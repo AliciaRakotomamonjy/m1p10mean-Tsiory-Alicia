@@ -33,7 +33,10 @@ module.exports = {
                         }
                     },
                     {
-                        $unwind: "$jointure"
+                        $unwind: {
+                            path: "$jointure",
+                            preserveNullAndEmptyArrays: true
+                        }
                     },
                     {
                         $lookup: {
@@ -44,7 +47,10 @@ module.exports = {
                         }
                     },
                     {
-                        $unwind: "$type_reparations"
+                        $unwind:  {
+                            path: "$type_reparations",
+                            preserveNullAndEmptyArrays: true
+                        }
                     },
                     {
                         $lookup: {
@@ -88,6 +94,24 @@ module.exports = {
                             }
                         }
                     },
+                    {
+                        $project: {
+                            _id: 1,
+                            etat: 1,
+                            voiture: 1,
+                            date_depot : 1,
+                            date_sortie: 1,
+                            date_debut_reparation: 1,
+                            date_fin_reparation: 1,
+                            typereparations: { $cond: {
+                                    if: { $eq: [ "$typereparations", [{}] ] },
+                                    then: [],
+                                    else: "$typereparations"
+                                }
+                            }
+                        }
+                    }
+                    
                     
                 ])
                 .exec();

@@ -16,6 +16,7 @@ export class KanboardComponent implements OnInit {
 
   etats : any[] = [] ;
   width!: number;
+  isLoading = true
 
   constructor(private etatService : EtatService, private reparationService : ReparationService){}
 
@@ -45,6 +46,7 @@ export class KanboardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      this.isLoading = true
       const reparation = event.item.data
       this.reparationService.updateReparationEtat(reparation._id,etat).subscribe(
         res=>{
@@ -54,7 +56,15 @@ export class KanboardComponent implements OnInit {
           
         }
       )
-      
+      this.etatService.getAllEtatAvecReparation().subscribe(
+        res=>{
+          this.etats = res.data;
+          this.width = this.etats.length && this.etats.length !== 0 ? Math.trunc(100 / this.etats.length ) : 0;
+        },error =>{
+          console.error(error)
+        }
+      )
+      this.isLoading = false
     }
   }
 }

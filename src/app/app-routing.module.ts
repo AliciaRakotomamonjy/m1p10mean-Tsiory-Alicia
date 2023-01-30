@@ -17,6 +17,7 @@ import { MesVoituresComponent } from './voitures/mes-voitures/mes-voitures.compo
 import { KanboardComponent } from './components/kanboard/kanboard.component';
 import { HistoComponent } from './historique/historique.component';
 import { DetailsReparComponent } from './reparations/details-reparations/details-reparations.component';
+import { DetailReparationComponent } from './components/detail-reparation/detail-reparation.component';
 
 
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path : 'atelier', component: TemplateAtelierComponent, 
     children : [
       { path : 'kanboard', component : KanboardComponent },
+      { path : 'detail-reparation/:idreparation',component : DetailReparationComponent }
     ]
   },
   {

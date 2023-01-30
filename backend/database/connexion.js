@@ -24,7 +24,8 @@
 //         }
 //     })
 // }
-// DB_URL = "mongodb://127.0.0.1:27017/db-garage"
+// 
+// DB_URL = "mongodb+srv://admin:admin123456789@cluster0.eqwhlbk.mongodb.net/test?retryWrites=true&w=majority"
 // database.close = () => {
 //     return new Promise(async (resolve, reject) => {
 //         try {

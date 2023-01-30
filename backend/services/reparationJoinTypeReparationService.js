@@ -24,5 +24,16 @@ module.exports = {
             console.error(error)
             throw error
         }
+    },
+    async modifieravancement(id,avancement){
+        try{
+            const result = await ReparationJoinTypeReparation
+                .findByIdAndUpdate(id, { $set: { avancement: avancement } }, { new: true })
+                .exec()
+            return result
+        }catch(error){
+            console.error(error)
+            throw error
+        }
     }
 }

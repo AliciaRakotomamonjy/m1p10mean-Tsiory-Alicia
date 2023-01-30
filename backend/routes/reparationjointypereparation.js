@@ -58,4 +58,28 @@ router.post("/",(req,res,next)=>{
   })
 })
 
+router.put("/:id",(req,res,next)=>{
+  reparationJoinTypeReparationSerivice.modifieravancement(req.params.id,req.body.avancement)
+  .then((reparation) => {
+    if(reparation){
+        res.status(200).json({
+            ok : true,
+            message : "Avancement enregistré avec succès !",
+            data : reparation
+        })
+    }else{
+        res.status(400).json({
+            ok : false,
+            message : "Enregistrement de l'avancement échoué !"
+        })
+    }
+  }).catch((error)=>{
+      console.error(error)
+      res.status(500).json({
+          ok : false,
+          message : "Une erreur s'est produite !"
+      })
+  })
+})
+
 module.exports = router;

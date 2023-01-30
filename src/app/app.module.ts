@@ -43,6 +43,7 @@ import { DetailsReparComponent } from './reparations/details-reparations/details
 import { KanboardComponent } from './components/kanboard/kanboard.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DetailReparationComponent } from './components/detail-reparation/detail-reparation.component';
+import { DialogOverviewExampleDialogComponent } from './components/dialog-overview-example-dialog/dialog-overview-example-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DetailReparationComponent } from './components/detail-reparation/detail
     DetailReparationComponent,
     ReparationEncoursComponent,
     HistoComponent,
-    DetailsReparComponent
+    DetailsReparComponent,
+    DialogOverviewExampleDialogComponent
   ],
   imports: [
     HttpClientModule,

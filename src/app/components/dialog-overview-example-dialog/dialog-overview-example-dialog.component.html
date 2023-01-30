@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Avancement</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill" style="width:100%;">
+    <mat-label>Avancement en cours</mat-label>
+    <input matInput type="number" [(ngModel)]="data.avancement">
+  </mat-form-field>
+  <div  *ngIf="data.avancement < 0" style="width:100%; " class="alert alert-danger" role="alert">
+    L'avancement ne doit pas etre négatif
+    </div>
+    <div *ngIf="data.avancement > 100" style="width:100%; " class="alert alert-danger" role="alert">
+    L'avancement ne doit pas dépassé 100
+    </div>
+    </div>
+
+<div mat-dialog-actions >
+    <button [disabled]=" data.avancement > 100 || data.avancement < 0" style="margin-left: 30px;" mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Enregistrer</button>
+    <button mat-button (click)="onNoClick()" >Annuler</button>
+</div>

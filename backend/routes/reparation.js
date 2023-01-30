@@ -142,7 +142,7 @@ router.get("/:id",(req,res,next)=>{
           res.status(200).json({
               ok : true,
               message : "Donnée récupérée avec succès !",
-              data : reparation
+              data : reparation.length === 1 ? reparation[0] : null
           })
       }else{
           res.status(404).json({
