@@ -12,6 +12,7 @@ const loginRouter = require("./backend/routes/login");
 const voitureRouter = require("./backend/routes/voitures");
 const reparationRouter = require("./backend/routes/reparation");
 const detailsreparationsRouter = require("./backend/routes/reparationjointypereparation");
+const caisseRouter = require("./backend/routes/caisse");
 
 mongoose.set("strictQuery", false);
 
@@ -42,6 +43,7 @@ mongoose
     app.use("/api/login", loginRouter);
     app.use("/api/reparation", reparationRouter);
     app.use("/api/detailsreparation", detailsreparationsRouter);
+    app.use("/api/caisse",caisseRouter);
 
     // Catch all other routes and return the index file
     app.get("*", (req, res) => {
